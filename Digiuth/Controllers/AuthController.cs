@@ -101,16 +101,16 @@ namespace Digiuth.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        //public async Task CreateRole()
-        //{
-        //    if (!await _roleManager.RoleExistsAsync("Admin"))
-        //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
-        //    }
-        //    if (!await _roleManager.RoleExistsAsync("User"))
-        //    {
-        //        await _roleManager.CreateAsync(new IdentityRole { Name = "User" });
-        //    }
-        //}
+        public async Task CreateRole()
+        {
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
+            }
+            if (!await _roleManager.RoleExistsAsync("User"))
+            {
+                await _roleManager.CreateAsync(new IdentityRole { Name = "User" });
+            }
+        }
     }
 }
