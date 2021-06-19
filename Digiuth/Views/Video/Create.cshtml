@@ -1,0 +1,25 @@
+﻿@model CourseVideo
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form method="post" style="margin:200px" enctype="multipart/form-data">
+    <input type="hidden" name="CourseId" value="@ViewBag.Id" />
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input asp-for="Video" class="form-control" aria-describedby="emailHelp" placeholder="Enter Video">
+        <span asp-validation-for="Video" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Title</label>
+        <input asp-for="Title" class="form-control" placeholder="Title">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts{
+    <partial name="_Validation" />
+}

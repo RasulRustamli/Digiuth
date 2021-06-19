@@ -1,0 +1,252 @@
+﻿@model AboutVM
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<!-- main-area -->
+<main>
+
+    <!-- search-popup -->
+    <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content search-popup">
+                <div class="text-center">
+                    <a href="#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
+                </div>
+                <div class="row search-outer">
+                    <div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
+                    <div class="col-md-1 text-right"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /search-popup -->
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area d-flex align-items-center" style="background-image:url(assets/img/testimonial/test-bg.png)">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="breadcrumb-wrap text-left">
+                        <div class="breadcrumb-title">
+                            <h2>About Us</h2>
+                            <div class="breadcrumb-wrap">
+
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">About</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+    <!-- about-area -->
+    <section id="about" class="about-area about-p pt-120 pb-120 p-relative" style="background: url(assets/img/features/about-bg-aliments.png) no-repeat;background-position: center center;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 col-sm-12 pr-30">
+                    <div class="s-about-img p-relative  wow fadeInLeft  animated" data-animation="fadeInLeft" data-delay=".4s">
+                        <img src="~/assets/img/features/@Model.AboutUs.Image" alt="img">
+                        <div class="about-text second-about">
+                            <div class="all-text">
+                                <h3>@Model.AboutUs.ExperienceYear</h3>
+                                <span>years of <br> experience</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="about-content s-about-content  wow fadeInRight  animated" data-animation="fadeInRight" data-delay=".4s">
+                        <div class="about-title second-atitle pb-25">
+                            <h5>About</h5>
+                            <h2>@Model.AboutUs.Title</h2>
+                        </div>
+
+                        <p>@Model.AboutUs.Description</p>
+
+                        <div class="about-content3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="green">
+                                        <li>@Model.AboutUs.AboutContent</li>
+                                        <li>@Model.AboutUs.AboutContent2</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="slider-btn mt-10">
+                            <a href="about.html" class="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- about-area-end -->
+    <!-- vedio-area -->
+    <section id="vedio" class="vedio-area pt-120 pb-90 fix" style=" background-image: url(assets/img/video/vedio-bg.png); background-repeat: no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-align text-center">
+                        <h5>Watch Us</h5>
+                        <h2>
+                           @Model.WatchUs.Title
+                        </h2>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <div class="video-img wow fadeInRight animated" data-animation="fadeInDown animated" data-delay=".2s" style="background-image:url(assets/img/video/vedio-img.png); background-repeat: no-repeat; background-position: center;">
+                        <a href="@Model.WatchUs.VideoUrl" class="video-i popup-video"> <img src="~/assets/img/video/play.svg" alt="img" class="active-icon"></a>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- vedio-area-end -->
+    <!-- team-area -->
+    <section id="team" class="team-area pb-90 fix" style=" background-image: url(assets/img/bg/services-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <div class="section-title center-align text-center mb-50">
+                            <h5>Our Team</h5>
+                            <h2>
+                                Our Team Members
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.User.Take(4))
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="single-team text-center mb-30 ">
+                            <div class="team-thumb">
+                                <div class="brd">
+                                    <img src="~/assets/img/team/@item.Image" alt="img">
+                                </div>
+                            </div>
+                            <div class="team-info">
+                                <h4><a href="team-details.html">@item.FullName</a></h4>
+                                <span>@item.Position</span>
+                                <div class="team-social mt-20">
+                                    <a href="@item.Facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="@item.Twitter"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- team-area-end -->
+    <!-- testimonial-area -->
+    <section class="testimonial-area pt-120 pb-120" style=" background-image: url(assets/img/testimonial/test-bg-aliments.png); background-repeat: no-repeat; background-position: center; background-color: #fff7f5;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-title second-atitle pt-15">
+                        <h5>Testimonial</h5>
+                        <h2>
+                            See What Our <br>Client Say’s
+                        </h2>
+                        <p class="pt-15">Curabitur tristique, sem id sagittis varius, lacus ligula mollis dui, ac condimentum felis metus ut nulla. Aenean ut ultricies turpis, sed sollicitudin eros. Aliquam quis dui ut diam lobortis dignissim ut aliquet ex.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="testimonial-active">
+                        @foreach (var item in Model.Testimonials)
+                        {
+                            <div class="single-testimonial">
+                                <div class="testi-author">
+                                    <img src="~/assets/img/testimonial/@item.Image" alt="img">
+                                    <div class="ta-info">
+                                        <h6>@item.FullName</h6>
+                                        <span>@item.Position</span>
+                                    </div>
+                                </div>
+                                <div class="qt-img">
+                                    <img src="~/assets/img/testimonial/qt-icon.png" alt="img">
+                                </div>
+                                <p>@item.Description</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial-area-end -->
+    <!-- blog-area -->
+    <section id="blog" class="blog-area  p-relative pt-120 pb-90 fix" style=" background-image: url(assets/img/bg/blog-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <div class="section-title center-align text-center mb-50">
+                            <h5>Our Blog</h5>
+                            <h2>
+                                Latest News Feed
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.Blogs)
+                {
+                    <div class="col-lg-4 col-md-12">
+                        <div class="single-post2 mb-30  wow fadeInDown  animated">
+                            <div class="blog-thumb2">
+                                <a href="blog-details.html"><img src="~/assets/img/blog/@item.Image" alt="img"></a>
+                            </div>
+                            <div class="blog-content2 text-center">
+                                <div class="b-meta">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="date-b">
+                                                <i class="fal fa-calendar-alt"></i>@item.Date.ToString("dd MMMM,yyyy")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4><a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Title</a></h4>
+                                        <div class="blog-btn"><a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id"><i class="fal fa-chevron-circle-right"></i> Read More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- blog-area-end -->
+</main>
+<!-- main-area-end -->

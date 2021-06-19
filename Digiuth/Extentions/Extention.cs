@@ -28,8 +28,12 @@ namespace Digiuth.Extentions
             {
                 await file.CopyToAsync(fileStream);
             }
-
             return fileName;
+        }
+
+        public static bool IsVideo(this IFormFile file)
+        {
+            return file.ContentType.Contains("video/");
         }
     }
 }

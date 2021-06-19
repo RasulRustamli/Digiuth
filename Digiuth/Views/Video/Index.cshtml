@@ -1,0 +1,186 @@
+﻿@model VideoVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- breadcrumb-area -->
+<section class="breadcrumb-area d-flex align-items-center"
+         style="background-image:url(../../assets/img/testimonial/test-bg.png)">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-12 col-lg-12">
+                <div class="breadcrumb-wrap text-left">
+                    <div class="breadcrumb-title">
+                        <h2>All Videos</h2>
+                        <div class="breadcrumb-wrap">
+
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a asp-controller="home" asp-action="Index">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">All Videos</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- breadcrumb-area-end -->
+<!-- main-area -->
+<section class="video mt-5 pt-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12">
+                <div class="about-title text-center second-atitle pb-20">
+                    <h5>Lessons</h5>
+                    <h2>
+                        @Model.Course.Name
+                    </h2>
+                    <h3 id="timer" style="background-color:#9CCA46;color:white;border-radius:20px;width:200px">
+
+                    </h3>
+                </div>
+            </div>
+            </div>
+            <div class="row">
+                <div style="cursor:pointer;" class="col-xl-8"  id="parentVideo">
+                  
+                    <video id="video" class="w-100" controlsList="nodownload"  controls>
+                        <source data-id="@Model.CourseVideos.ElementAt(0).Duration" id="sourceVideo" src="@Model.CourseVideos.ElementAt(0).AwsVideoUrl" type="video/ogg">
+                    </video>
+                </div>
+                <div class="col-xl-4 mt-3">
+                    <h5 class="course-video-title">Kurs İçeriği </h5>
+                    <ul class="co1urse-video-link">
+                        @for (int i = 0; i < Model.CourseVideos.Count(); i++)
+                        {
+                            @*<li class="d-flex justify-content-between video-list-li @(i==0 ? "video-active" : "") " style="cursor:pointer;">
+                <span>
+                    @Model.CourseVideos.ElementAt(i).Title
+                </span>
+                <a class="d-none">@Model.CourseVideos.ElementAt(i).AwsVideoUrl</a>
+                <span class="video-duration">
+                    @Model.CourseVideos.ElementAt(i).Duration
+                </span>
+            </li>*@
+                            <li class="d-flex justify-content-between video-list-li @(i==0 ? "video-active" : "") " style="cursor:pointer;">
+                                <span>
+                                    @Model.CourseVideos.ElementAt(i).Title
+                                </span>
+                                <a class="d-none">@Model.CourseVideos.ElementAt(i).AwsVideoUrl</a>
+                                <span class="video-duration">
+                                    @Model.CourseVideos.ElementAt(i).Duration
+                                </span>
+                            </li>
+
+
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+</section>
+
+<!-- services-area -->
+<section id="services" class="services-area pt-120 pb-120 fix"
+         style=" background-image: url(../../assets/img/bg/services-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+    <div class="container">
+
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12">
+                <div class="about-title text-center second-atitle pb-20">
+                    <h5>Services</h5>
+                    <h2>
+                        What We Provide To You
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach (var item in Model.MainCategories)
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="services-box wow fadeInDown  animated" data-delay=".5s">
+                            <div class="services-icon">
+                                <img src="~/assets/img/category/@item.PhotoUrl" alt="icon01">
+                            </div>
+                            <div class="services-content2">
+                                <h5><a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a> </h5>
+                                <p>@item.ShortDesc</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- services-area-end -->
+<!-- main-area-end -->
+@section Scripts{
+    <script>
+        let video = document.getElementById("video");
+        let previewVideoDurationArray = document.getElementById("sourceVideo").getAttribute("data-id").split(":");
+        let listLi = document.querySelectorAll(".video-list-li");        
+        let i = parseInt(previewVideoDurationArray[1]) * 60 + parseInt(previewVideoDurationArray[2]);
+        let intervalStart;
+        listLi.forEach(item => {
+            item.addEventListener("click", function (e) {
+                let durationArray=e.target.lastElementChild.innerHTML.split(":");
+                i = parseInt(durationArray[1]) * 60 + parseInt(durationArray[2]);
+                document.getElementById("timer").innerHTML = i;
+                
+                listLi.forEach(a => {
+                    a.classList.remove("video-active");
+                })
+                item.classList.add("video-active");
+                reCreateVideoTagWithNewSrc(item);
+            })
+        });
+
+
+        function reCreateVideoTagWithNewSrc(item) {
+            
+            document.getElementById("parentVideo").innerHTML = "";
+            document.getElementById("parentVideo").innerHTML = `
+                <video id="video" class="w-100" controls controlsList="nodownload">
+                   <source id="sourceVideo" src="${item.firstElementChild.nextElementSibling.innerHTML}" type="video/ogg"></video>`;
+            let video2 = document.getElementById("video");
+            video2.addEventListener('play', () => {
+                startTimer();
+                console.log("Video deyisende salam");
+            });
+            video2.addEventListener('pause', () => {
+                endInterval();
+            });
+        }
+        
+
+        video.addEventListener('play', () => {
+            startTimer();
+        });
+        
+        function startTimer() {
+           let timer = document.getElementById("timer");
+          intervalStart= setInterval(function () {
+                timer.innerHTML = i;
+                i--
+            }, 1000);
+        }
+        function endInterval() {
+            clearInterval(intervalStart);
+        }
+        video.addEventListener('pause', () => {
+            endInterval();
+        });
+        video.addEventListener('play', () => {
+            startTimer();
+        });
+
+    </script>
+}

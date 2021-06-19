@@ -1,0 +1,113 @@
+﻿@model Bio
+@{
+    Layout = null;
+}
+
+<footer class="footer-bg footer-p fix"
+        style=" background-image: url(assets/img/bg/footer-bg.png); background-repeat: no-repeat; background-position: center;">
+    <div class="footer-top  pt-70 pb-40">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-sm-12">
+                    <div class="footer-widget mb-30">
+
+                        <img src="~/assets/img/logo/f_logo.png" alt="img">
+
+                    </div>
+                </div>
+                <div class="col-xl-7 col-lg-7 col-sm-12">
+                    
+                </div>
+                <div class="col-xl-2 col-lg-2 col-sm-12">
+                    <div class="footer-widget footer-social mt-15  text-right text-xl-right">
+                        <a href="@Model.Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="@Model.Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="@Model.Twitter"><i class="fab fa-twitter"></i></a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-center  pt-70 pb-40">
+        <div class="container">
+            <div class="row justify-content-between">
+
+                <div class="col-xl-3 col-lg-3 col-sm-6">
+                    <div class="footer-widget mb-30">
+                        <div class="f-widget-title">
+                            <h2>About Us</h2>
+                        </div>
+                        <div class="footer-link">
+                            @Model.AboutUs
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-sm-6">
+                    <div class="footer-widget mb-30">
+                        <div class="f-widget-title">
+                            <h2>Contact Us</h2>
+                        </div>
+                        <div class="f-contact">
+                            <ul>
+                                <li>
+                                    <i class="icon fal fa-map-marker-check"></i>
+                                    <span>@Model.Address</span>
+                                </li>
+                                <li>
+                                    <i class="icon fal fa-phone"></i>
+                                    <span>@Model.Phone<br>@Model.Phone2</span>
+                                </li>
+                                <li>
+                                    <i class="icon fal fa-envelope"></i>
+                                    <span>
+                                        <a href="mailto:info@example.com">@Model.Email</a>
+                                        <br>
+                                        <a href="mailto:help@example.com">@Model.Email2</a>
+                                    </span>
+                                </li>
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-sm-6">
+                    <div class="footer-widget mb-30">
+                        <div class="f-widget-title">
+                            <h2>Our Services</h2>
+                        </div>
+                        <div class="footer-link">
+                            <ul>
+                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-controller="About" asp-action="Index"> About Us</a></li>
+                                <li><a asp-controller="Course" asp-action="Index"> Courses </a></li>
+                                <li><a asp-controller="Home" asp-action="Index"> Contact Us</a></li>
+                                <li><a asp-controller="Blog" asp-action="Index">Blog </a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright-wrap">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    Copyright &copy; 2021 Luxia. All rights reserved.
+                </div>
+                <div class="col-lg-6 text-right text-xl-right">
+                    <ul>
+                        <li><a href="#">Privercy</a></li>
+                        <li><a href="#">Term & Conditions</a></li>
+                        <li><a href="#">Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,20 @@
+﻿@model CourseContent
+@{
+    ViewData["Title"] = "AddContent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<form method="post" style="margin:200px" enctype="multipart/form-data">
+    <input type="hidden" name="CourseId" value="@ViewBag.CourseId" />
+    <div class="form-group">
+        <label for="exampleInputEmail1">Content</label>
+        <input asp-for="Content" class="form-control" aria-describedby="emailHelp" placeholder="Enter Content">
+        <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts{
+    <partial name="_Validation" />
+}

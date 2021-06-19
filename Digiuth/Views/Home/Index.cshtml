@@ -1,7 +1,435 @@
-﻿
+﻿@model HomeVM
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!-- main-area -->
+<main>
 
+    <!-- search-popup -->
+    <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content search-popup">
+                <div class="text-center">
+                    <a href="#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
+                </div>
+                <div class="row search-outer">
+                    <div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
+                    <div class="col-md-1 text-right">
+                        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /search-popup -->
+    <!-- slider-area -->
+    <section id="home" class="slider-area slider-four fix p-relative">
+        <div class="slider-active">
+            <div class="single-slider slider-bg d-flex align-items-center"
+                 style="background: url(assets/img/slider/slider_img_bg.png) no-repeat;background-position: center center;">
+                <div class="container">
+                    <div class="row justify-content-center pt-50  pb-150">
+                        <div class="col-lg-7">
+                            <div class="slider-content s-slider-content mt-200">
+                                <h2 data-animation="fadeInUp" data-delay=".4s">Start Learning With Us Now!</h2>
+                                <p data-animation="fadeInUp" data-delay=".6s">
+                                    Cras faucibus ornare ipsum, non luctus
+                                    leo imperdiet sit amet. Praesent egestas orci eu risus iaculis luctus. Phasellus
+                                    maximus orci metus.
+                                </p>
+                                <div class="subricbe" data-animation="fadeInDown" data-delay=".4s">
+                                    <form action="news-mail.php" method="post" class="contact-form ">
+                                        <label><i class="icon fal fa-envelope"></i> Email Address</label>
+                                        <input type="text" id="inputEmail" name="email2" class="header-input"
+                                               placeholder="Your Email Address..." required>
+                                        <button class="btn header-btn" id="subscribeBtn"> Subscribe Now </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="slider-img" data-animation="fadeInUp" data-delay=".4s">
+                                <img src="~/assets/img/slider/slider_img05.png" alt="slider_img05">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- slider-area-end -->
+    <!-- about-area -->
+    <section id="about" class="about-area about-p pt-70 pb-120 p-relative"
+             style="background: url(assets/img/features/about-bg-aliments.png) no-repeat;background-position: center center;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 col-md-12 col-sm-12 pr-30">
+                    <div class="s-about-img p-relative  wow fadeInLeft  animated" data-animation="fadeInLeft"
+                         data-delay=".4s">
+                        <img src="~/assets/img/features/@Model.AboutUs.Image" alt="img">
+                        <div class="about-text second-about">
+                            <div class="all-text">
+                                <h3>@Model.AboutUs.ExperienceYear</h3>
+                                <span>illik <br> tecrube</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="about-content s-about-content  wow fadeInRight  animated"
+                         data-animation="fadeInRight" data-delay=".4s">
+                        <div class="about-title second-atitle pb-25">
+                            <h5>About</h5>
+                            <h2>@Model.AboutUs.Title</h2>
+                        </div>
+                        <p>
+                            @Model.AboutUs.Description
+                        </p>
+                        <div class="about-content3">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul class="green">
+                                        <li>
+                                            @Model.AboutUs.AboutContent
+                                        </li>
+                                        <li>
+                                            @Model.AboutUs.AboutContent2
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-btn mt-10">
+                            <a asp-controller="About"asp-action="Index" class="btn ss-btn" data-animation="fadeInRight"
+                               data-delay=".8s">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about-area-end -->
+    <!-- vedio-area -->
+    <section id="vedio" class="vedio-area pt-120 pb-90 fix"
+             style=" background-image: url(assets/img/video/vedio-bg.png); background-repeat: no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-align text-center">
+                        <h5>Watch Us</h5>
+                        <h2>
+                            @Model.WatchUs.Title
+                        </h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="video-img wow fadeInRight animated" data-animation="fadeInDown animated"
+                         data-delay=".2s"
+                         style="background-image:url(assets/img/video/vedio-img.png); background-repeat: no-repeat; background-position: center;">
+                         <a href="@Model.WatchUs.VideoUrl" class="video-i popup-video">
+                            <img src="~/assets/img/video/play.svg" alt="img" class="active-icon">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- vedio-area-end -->
+    <!-- services-area -->
+    <section id="services" class="services-area pb-90 fix"
+             style=" background-image: url(assets/img/bg/services-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+
+            <div class="row align-items-center">
+                <div class="col-lg-4 col-md-12">
+                    <div class="about-title second-atitle pb-20">
+                        <h5>Services</h5>
+                        <h2>
+                            What We Provide To You
+                        </h2>
+                        <p>
+                            Pellentesque fringilla, massa sit amet feugiat mollis, leo turpis elementum justo, vel
+                            consequat ex urna ut massa maecenas justo sapien.
+                        </p>
+                    </div>
+
+                    <div class="slider-btn mt-10">
+                        <a  class="btn ss-btn" asp-controller="Course" asp-action="Index" data-animation="fadeInRight"
+                           data-delay=".8s">View All Services</a>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-12">
+                    <div class="row">
+                        @foreach (var item in Model.MainCategories.Take(6))
+                        {
+                            <div class="col-lg-4 col-md-6">
+                                <div class="services-box wow fadeInDown  animated" data-delay=".5s">
+                                    <div class="services-icon">
+                                        <img src="~/assets/img/category/@item.PhotoUrl" alt="icon01">
+                                    </div>
+                                    <div class="services-content2">
+                                        <h5><a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a> </h5>
+                                        <p>@item.ShortDesc</p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- services-area-end -->
+    <!-- featured-courses-area -->
+    <section id="courses" class="courses-area fix">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-align text-center mb-50">
+                        <h5>Best Courses</h5>
+                        <h2>
+                            Featured Courses
+                        </h2>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+
+                    <div class="featured-courses-active">
+
+                        <div class="box-courses">
+                            <a href="courses-details.html">
+                                <img src="~/assets/img/featured-courses/courses-img1.png"
+                                     alt="courses-img1">
+                            </a>
+                            <div class="text">
+                                <h5>3 Years</h5>
+                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
+                            </div>
+                        </div>
+                        <div class="box-courses">
+                            <a href="courses-details.html">
+                                <img src="~/assets/img/featured-courses/courses-img2.png"
+                                     alt="courses-img1">
+                            </a>
+                            <div class="text">
+                                <h5>3 Years</h5>
+                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
+                            </div>
+                        </div>
+                        <div class="box-courses">
+                            <a href="courses-details.html">
+                                <img src="~/assets/img/featured-courses/courses-img3.png"
+                                     alt="courses-img1">
+                            </a>
+                            <div class="text">
+                                <h5>3 Years</h5>
+                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
+                            </div>
+                        </div>
+                        <div class="box-courses">
+                            <a href="courses-details.html">
+                                <img src="~/assets/img/featured-courses/courses-img4.png"
+                                     alt="courses-img1">
+                            </a>
+                            <div class="text">
+                                <h5>3 Years</h5>
+                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
+                            </div>
+                        </div>
+                        <div class="box-courses">
+                            <a href="courses-details.html">
+                                <img src="~/assets/img/featured-courses/courses-img5.png"
+                                     alt="courses-img1">
+                            </a>
+                            <div class="text">
+                                <h5>3 Years</h5>
+                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
+                            </div>
+                        </div>
+                        <div class="box-courses">
+                            <a href="courses-details.html">
+                                <img src="~/assets/img/featured-courses/courses-img1.png"
+                                     alt="courses-img1">
+                            </a>
+                            <div class="text">
+                                <h5>3 Years</h5>
+                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <!-- featured-courses-area-end -->
+    <!-- eventes-area -->
+    <section id="eventes" class="eventes-area fix pt-120 pb-120"
+             style=" background-image: url(assets/img/bg/event-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-align text-center mb-50">
+                        <h5>Our Events</h5>
+                        <h2>
+                            Upcoming Events
+                        </h2>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                @foreach (var item in Model.OurEvents.Take(6).OrderByDescending(x=>x.Id))
+                {
+                    <div class="col-lg-6 col-md-12">
+
+                        <div class="eventes-box">
+                            <div class="date-box">
+                                <h3>@item.StartDate.ToString("dd")</h3>
+                                <h5>@item.StartDate.ToString("MMMM, yyyy")</h5>
+                            </div>
+                            <div class="text">
+                                <h5><a asp-controller="Event" asp-action="Detail" asp-route-id="@item.Id">@item.Title</a></h5>
+                                <ul>
+                                    <li><i class="fal fa-clock"></i> @item.StartTime.ToString("hh:mm tt") - @item.EndTime.ToString("hh:mm tt")</li>
+                                    <li><i class="icon fal fa-map-marker-check"></i> @item.Place</li>
+                                </ul>
+                                <p>
+                                    @item.ShortDesc
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <div class="slider-btn mt-30">
+                        <a asp-controller="Event" asp-action="Index" class="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">
+                            View
+                            All Events
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- eventes-area-end -->
+    <!-- testimonial-area -->
+    <section class="testimonial-area pt-120 pb-120"
+             style=" background-image: url(assets/img/testimonial/test-bg-aliments.png); background-repeat: no-repeat; background-position: center; background-color: #fff7f5;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="about-title second-atitle pt-15">
+                        <h5>Testimonial</h5>
+                        <h2>
+                            See What Our <br>Client Say’s
+                        </h2>
+                        <p class="pt-15">
+                            Curabitur tristique, sem id sagittis varius, lacus ligula mollis dui, ac
+                            condimentum felis metus ut nulla. Aenean ut ultricies turpis, sed sollicitudin eros.
+                            Aliquam quis dui ut diam lobortis dignissim ut aliquet ex.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="testimonial-active">
+                        @foreach (var item in Model.Testimonials)
+                        {
+                            <div class="single-testimonial">
+                                <div class="testi-author">
+                                    <img src="~/assets/img/testimonial/@item.Image" alt="img">
+                                    <div class="ta-info">
+                                        <h6>@item.FullName</h6>
+                                        <span>@item.Position</span>
+                                    </div>
+                                </div>
+                                <div class="qt-img">
+                                    <img src="~/assets/img/testimonial/qt-icon.png" alt="img">
+                                </div>
+                                <p>
+                                    @item.Description
+                                </p>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial-area-end -->
+    <!-- blog-area -->
+    <section id="blog" class="blog-area  p-relative pt-120 pb-90 fix"
+             style=" background-image: url(assets/img/bg/blog-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+                        <div class="section-title center-align text-center mb-50">
+                            <h5>Our Blog</h5>
+                            <h2>
+                                Latest News Feed
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                @foreach (var item in Model.Blogs)
+                {
+                    <div class="col-lg-4 col-md-12">
+                        <div class="single-post2 mb-30  wow fadeInDown  animated">
+                            <div class="blog-thumb2">
+                                <a href="blog-details.html"><img src="~/assets/img/blog/@item.Image" alt="img"></a>
+                            </div>
+                            <div class="blog-content2 text-center">
+                                <div class="b-meta">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="date-b">
+                                                <i class="fal fa-calendar-alt"></i> @item.Date.ToString("dd MMMM, yyyy")
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4>
+                                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">
+                                                @item.Title
+                                            </a>
+                                        </h4>
+                                        <div class="blog-btn">
+                                            <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">
+                                                <i class="fal fa-chevron-circle-right"></i> Read More
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+    <!-- blog-area-end -->
+</main>
+<!-- main-area-end -->

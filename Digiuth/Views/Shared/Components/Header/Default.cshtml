@@ -1,0 +1,137 @@
+﻿@model Bio
+@{
+    Layout = null;
+}
+
+<header class="header-area header-three">
+    <div id="header-sticky" class="menu-area">
+        <div class="container">
+            <div class="second-menu">
+                <div class="row align-items-center">
+                    <div class="col-xl-2 col-lg-2">
+                        <div class="logo">
+                            <a asp-controller="Home" asp-action="Index"><img src="~/assets/img/logo/logo.png" alt="logo"></a>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-8">
+
+                        <div class="main-menu text-right text-xl-right">
+                            <nav id="mobile-menu" style="display: block;">
+                                <ul>
+                                    <li class="sub">
+                                        <a asp-controller="Home" asp-action="Index">Ana Səhifə</a>
+                                    </li>
+                                    <li class="sub">
+                                        <a asp-controller="About" asp-action="Index">Haqqımızda</a>
+                                    </li>
+                                    <li class="sub">
+                                        <a asp-controller="Course" asp-action="Index">Kurslar</a>
+                                    </li>
+                                    <li class="sub">
+                                        <a asp-controller="Event" asp-action="Index">Tədbirlər</a>
+                                    </li>
+
+                                    <li class="sub">
+                                        <a asp-controller="Team" asp-action="Index">Muəllimlər</a>
+                                    </li>
+
+                                    <li class="sub">
+                                        <a asp-controller="Blog" asp-action="Index">Blog</a>
+                                    </li>
+
+
+                                    <li><a asp-controller="Contact" asp-action="Index">Əlaqə</a></li>
+                                   
+                                    <li class="sub">
+                                        @if (!User.Identity.IsAuthenticated)
+                                        {
+                                            <a asp-controller="Auth" asp-action="Login">Login</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/" onclick="return false;">Hi @ViewBag.User.FullName</a>
+                                            <ul>
+                                                <li><a asp-controller="Auth" asp-action="UpdateProfile">Update Profile</a></li>
+                                                @if (User.IsInRole("Teacher"))
+                                                {
+                                                    <li><a asp-controller="Course" asp-action="MyCourses">My Courses</a></li>
+                                                    <li><a asp-controller="Course" asp-action="Create">Create Course</a></li>
+                                                }
+                                                @if (User.IsInRole("Student"))
+                                                {
+                                                    <li><a asp-controller="Course" asp-action="UserInstalledCourse">My Courses</a></li>
+                                                }
+                                                <li><a asp-controller="Auth" asp-action="Logout">Log Out</a></li>
+                                            </ul>
+                                        }
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-2 text-right d-none d-xl-block mt-30 mb-30">
+                        <div class="search-top2">
+                            <ul>
+
+                                <li><a href="#" class="menu-tigger"><i class="fas fa-search"></i></a></li>
+                                <li>
+                                    <a href="#" class="menu-tigger"><img src="~/assets/img/icon/menu.png" alt="logo"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <div class="mobile-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- offcanvas-area -->
+<div class="offcanvas-menu">
+    <span class="menu-close"><i class="fas fa-times"></i></span>
+    <form role="search" method="get" id="searchList" class="searchform">
+        <input type="text" name="s" id="input-search" value="" placeholder="Search" />
+    </form>
+
+
+    <div id="cssmenu3" class="menu-one-page-menu-container">
+        <ul id="menu-one-page-menu-2" class="menu">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a asp-controller="About" asp-action="Index">About Us</a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a asp-controller="Course" asp-action="Index">Kurslar</a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a asp-controller="Event" asp-action="Index">Tədbirlər </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="team.html">Team </a></li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom"><a asp-controller="Blog" asp-action="Index">Blog</a></li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a asp-controller="Contact" asp-action="Index">Contact</a>
+            </li>
+        </ul>
+    </div>
+
+    <div id="cssmenu2" class="menu-one-page-menu-container">
+        <ul id="menu-one-page-menu-1" class="menu">
+            <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a href="#home">
+                    <span>
+                        @Model.Phone
+                    </span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-type-custom menu-item-object-custom">
+                <a href="#howitwork"><span>@Model.Email</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="offcanvas-overly"></div>
+<!-- offcanvas-end -->

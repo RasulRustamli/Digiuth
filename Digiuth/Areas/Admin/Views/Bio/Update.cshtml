@@ -1,0 +1,122 @@
+﻿@model Bio
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Update Job List</h4>
+            <form class="form-sample" method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Phone:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Phone" class="form-control" placeholder="Phone" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Phone2:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Phone2" class="form-control" placeholder="Phone2" />
+                                <span asp-validation-for="Phone2" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Address:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Address" class="form-control" placeholder="Address" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Email:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Email" class="form-control" placeholder="Email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Email2:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Email2" class="form-control" placeholder="Email2" />
+                                <span asp-validation-for="Email2" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Facebook:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Facebook" class="form-control" placeholder="Facebook" />
+                                <span asp-validation-for="Facebook" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Twitter:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Twitter" class="form-control" placeholder="Twitter" />
+                                <span asp-validation-for="Twitter" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Instagram:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Instagram" class="form-control" placeholder="Instagram" />
+                                <span asp-validation-for="Instagram" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">About Us:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="AboutUs" class="form-control" placeholder="AboutUs" />
+                                <span asp-validation-for="AboutUs" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Pinterst:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Pinterst" class="form-control" placeholder="Pinterst" />
+                                <span asp-validation-for="Pinterst" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">WordPress:</label>
+                            <div class="col-sm-9">
+                                <input asp-for="WordPress" class="form-control" placeholder="WordPress" />
+                                <span asp-validation-for="WordPress" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" name="name" value="Update" class="btn btn-primary" />
+                <a asp-controller="Bio" asp-action="Index" class="btn btn-light">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

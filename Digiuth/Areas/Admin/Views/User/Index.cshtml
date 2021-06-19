@@ -1,0 +1,108 @@
+﻿@model IEnumerable<UserVM>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    int Count = 0;
+}
+<input type="hidden" id="hidden" value="user" />
+<div class="">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Image
+                            </th>
+                            <th>
+                                Full Name
+                            </th>
+                            <th>
+                                Position
+                            </th>
+                            <th>
+                                Phone
+                            </th>
+                            <th>
+                                Address
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            <th>
+                                Settings
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (UserVM user in Model)
+                        {
+                            Count++;
+                            <tr>
+                                <td>
+                                    @Count
+                                </td>
+                                <td class="py-1">
+                                    @if (user.Image != null)
+                                    {
+                                        <img src="~/assets/img/team/@user.Image" alt="image" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/assets/img/team/team_img01.jpg" />
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-controller="User" asp-action="UserDetail" asp-route-id="@user.Id"> @user.FullName</a>
+                                </td>
+                                <td>
+                                    @user.Position
+                                </td>
+                                <td>
+                                    @user.Phone
+                                </td>
+                                <td>
+                                    @user.Address
+                                </td>
+
+                                @if (user.IsVerified)
+                                {
+                                    <td style="color:lawngreen">
+                                        Active
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td style="color:red">
+                                        Disable
+                                    </td>
+                                }
+                                <td>
+                                    @if (user.IsVerified)
+                                    {
+                                        <a asp-action="Active" asp-route-id="@user.Id" class="btn btn-danger">
+                                            <i class="mdi mdi-account-off"></i>
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="Disable" asp-route-id="@user.Id" class="btn btn-success">
+                                            <i class="mdi mdi-account-check"></i>
+                                        </a>
+                                    }
+                                    <a asp-action="DeleteUser" asp-route-id="@user.Id" class="btn btn-secondary">
+                                        <i class="mdi mdi-account-remove"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,193 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- main-area -->
+<main>
+    <input type="hidden" id="hidden" value="course" />
+   <!-- search-popup -->
+    <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content search-popup">
+                <div class="text-center">
+                    <a href="#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
+                </div>
+                <div class="row search-outer">
+                    <div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
+                    <div class="col-md-1 text-right">
+                        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /search-popup -->
+    <!-- /search-popup -->
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area d-flex align-items-center"
+             style="background-image:url(../../assets/img/testimonial/test-bg.png)">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="breadcrumb-wrap text-left">
+                        <div class="breadcrumb-title">
+                            <h2>Courses Details</h2>
+                            <div class="breadcrumb-wrap">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Course</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+    <!-- Project Detail -->
+    <section class="project-detail">
+        <div class="container">
+            <!-- Lower Content -->
+            <div class="lower-content">
+                <div class="row">
+                    <div class="text-column col-lg-8 col-md-8 col-sm-12">
+                        <h2>@Model.Name</h2>
+                        <ul class="course-meta review style2 clearfix mb-30">
+                            <li class="author">
+                                <div class="thumb">
+                                    <img src="~/assets/img/team/@Model.AppUser.Image" alt="image">
+                                </div>
+                                <div class="text">
+                                    <a href="#">@Model.AppUser.FullName</a>
+                                    <p>Teacher</p>
+                                </div>
+                            </li>
+                            <li class="categories">
+                                <a href="#" class="course-name">@Model.ChildCategory.MainCategory.Name</a>
+                                <p>Category</p>
+                            </li>
+                            <li class="categories">
+                                <a href="#" class="course-name">@Model.ChildCategory.Name</a>
+                                <p>Lesson</p>
+                            </li>
+                            <li class="categories">
+                                <a href="#" class="course-name">Price</a>
+                                <p>$ @Model.Price</p>
+                            </li>
+                        </ul>
+                        @*<div class="video-img wow fadeInRight animated" data-animation="fadeInDown animated"
+                                 data-delay=".2s"
+                                 style="background-image:url(../../assets/img/course/@Model.Image); background-repeat: no-repeat; background-position: center;">
+                                <a href="@Model.CourseVideos.FirstOrDefault(x=>x.IsPreview)" class="video-i popup-video">
+                                    <img src="~/assets/img/video/play.svg" alt="img" class="active-icon">
+                                </a>
+                            </div>*@
+                        <video class="detail-video" controls="controls">
+                            <source src="@Model.CourseVideos.FirstOrDefault(x=>x.IsPreview).AwsVideoUrl" type="video/ogg" />
+                        </video>
+                        <div class="inner-column">
+                            <p>
+                                <span class="dropcap">Digiuth</span> @Model.LongDesc
+                            </p>
+                            <h4>What You Will Learn</h4>
+                            <p>
+                                @Model.WhatYouWillLearn
+                            </p>
+                            @if (Model.AppUser.UserName == User.Identity.Name)
+                            {
+                                <div class="row mb-3 ml-3"> <a asp-action="AddContent" asp-route-id="@Model.Id" style="color:blue">Create Content</a></div>
+                            }
+                            <ul class="pr-ul">
+                                @foreach (var item in Model.CourseContents)
+                                {
+                                    <li>
+                                        <div class="icon"><i class="fal fa-check"></i></div>
+                                        <div class="text">
+                                            @item.Content
+                                            @if (item.Course.AppUser.UserName == User.Identity.Name)
+                                            {
+                                                <a asp-action="DeleteContent" asp-route-id="@item.Id" style="color:red">Delete</a>
+                                            }
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <aside class="sidebar-widget">
+                            <section class="widget widget_search">
+                                <div class="course-widget-price">
+                                    <h2 class="widget-title">Course Features</h2>
+                                    <ul>
+                                        <li>
+                                            <i class="fal fa-clock"></i>
+                                            <span>Starts</span>
+                                            <span class="time">@Model.StartDate.ToString("MMM dd, yyyy")</span>
+                                        </li>
+                                        <li>
+                                            <i class="fal fa-exclamation-circle"></i>
+                                            <span>Duration</span>
+                                            <span class="time">@Model.Duration</span>
+                                        </li>
+                                        <li>
+                                            <i class="fab fa-leanpub"></i>
+                                            <span>Class Duration</span>
+                                            <span class="time">@Model.ClassDuration</span>
+                                        </li>
+                                        <li>
+                                            <i class="fal fa-user-graduate"></i>
+                                            <span>Institution</span>
+                                            <span class="time">@Model.Institution</span>
+                                        </li>
+                                        <li>
+                                            <i class="fal fa-plus-hexagon"></i>
+                                            <span>Seats Available</span>
+                                            <span class="time">@Model.SeatsAvailable</span>
+                                        </li>
+                                        <li>
+                                            <i class="fal fa-user"></i>
+                                            <span>Level</span>
+                                            <span class="time">@Model.Level</span>
+                                        </li>
+                                    </ul>
+                                    <h5 class="pt-20 pb-20">Course Price: <span>$ @Model.Price</span></h5>
+                                    @if (User.Identity.Name == null)
+                                    {
+                                        <a class="btn ss-btn" asp-controller="Auth" asp-action="Login">Buy Now</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn ss-btn" asp-controller="UserCourse" asp-action="Create" asp-route-id="@Model.Id">Buy Now</a>
+                                    }
+
+
+
+                                </div>
+                            </section>
+                            <section id="categories-1" class="widget widget_categories">
+                                <h2 class="widget-title">Categories</h2>
+                                <ul>
+                                    @foreach (var item in ViewBag.MainCategories)
+                                    {
+                                        <li class="cat-item cat-item-16"><a href="#">@item.Name</a> (4)</li>
+                                    }
+                                </ul>
+                            </section>
+                        </aside>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--End Project Detail -->
+</main>
+<!-- main-area-end -->
+@section Scripts{
+
+    <script src="~/assets/js/search.js"></script>
+} 

@@ -3,12 +3,10 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
 
 
-
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-<form method="post">
+<form method="post" class="digiuth_login">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input asp-for="Email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
@@ -19,6 +17,8 @@
         <input asp-for="Password" class="form-control" placeholder="Password">
     </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary"style="padding:10px">Submit</button>
+    <a asp-action="TeacherRegister" class="btn btn-success" style="padding:10px; background-color:red" >Register for Teacher</a>
+    <a asp-action="StudentRegister" class="btn btn-primary" style="padding:10px; background-color:blue">Register for Student</a>
 </form>
 

@@ -1,0 +1,92 @@
+﻿@model Bio
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<input type="hidden" id="hidden" value="bio" />
+<div>
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <a asp-action="Update" class="btn btn bg-success">Update Bio</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Phone
+                            </th>
+                            <th>
+                                Phone2
+                            </th>
+                            <th>
+                                Adress
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Email2
+                            </th>
+                            <th>
+                                Facebook
+                            </th>
+                            <th>
+                                Twitter
+                            </th>
+                            <th>
+                                Instagram
+                            </th>
+                            <th>
+                                Pinterst
+                            </th>
+                            <th>
+                                WordPress
+                            </th>
+                            <th>
+                                About Us
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="cursor:pointer">
+                        <tr>
+                            <td>
+                                @Model.Phone
+                            </td>
+                            <td>
+                                @Model.Phone2
+                            </td>
+                            <td>
+                                @Model.Address
+                            </td>
+                            <td>
+                                @Model.Email
+                            </td>
+                            <td>
+                                @Model.Email2
+                            </td>
+                            <td>
+                                @Model.Facebook
+                            </td>
+                            <td>
+                                @Model.Twitter
+                            </td>
+                            <td>
+                                @Model.Instagram
+                            </td>
+                            <td>
+                                @Model.Pinterst
+                            </td>
+                            <td>
+                                @Model.WordPress
+                            </td>
+                            <td>
+                                @Model.AboutUs
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

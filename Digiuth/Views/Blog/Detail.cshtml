@@ -1,0 +1,156 @@
+﻿@model BlogVM
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- main-area -->
+<main>
+
+    <!-- search-popup -->
+    <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content search-popup">
+                <div class="text-center">
+                    <a href="#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
+                </div>
+                <div class="row search-outer">
+                    <div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
+                    <div class="col-md-1 text-right">
+                        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /search-popup -->
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area d-flex align-items-center"
+             style="background-image:url(../../assets/img/testimonial/test-bg.png)">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="breadcrumb-wrap text-left">
+                        <div class="breadcrumb-title">
+                            <h2>Blog Deatils</h2>
+                            <div class="breadcrumb-wrap">
+
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">Blog Deatils</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+    <!-- inner-blog -->
+    <section class="inner-blog b-details-p pt-120 pb-80">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="blog-details-wrap">
+                        <div class="details__content pb-30">
+                            <h2>
+                                @Model.Blog.Title
+                            </h2>
+                            <div class="meta-info">
+                                <ul>
+                                    @*<li><i class="fal fa-eye"></i> 100 Views </li>
+                                    <li><i class="fal fa-comments"></i> 35 Comments</li>*@
+                                    <li><i class="fal fa-calendar-alt"></i>@Model.Blog.Date.ToString("dd MMMM yyyy")</li>
+                                </ul>
+                            </div>
+                            <p>
+                                @Model.Blog.LongDesc
+                            </p>
+                            
+                            <div class="details__content-img">
+                                <img src="~/assets/img/blog/@Model.Blog.Image" alt="">
+                            </div>
+                            
+                        </div>
+                        <div class="related__post mt-45 mb-85">
+                            <div class="post-title">
+                                <h4>Related Post</h4>
+                            </div>
+                            <div class="row">
+                                @foreach (var item in Model.Blogs.Take(2).OrderByDescending(x=>x.Id))
+                                {
+                                    <div class="col-md-6">
+                                        <div class="related-post-wrap mb-30">
+                                            <div class="post-thumb">
+                                                <img src="~/assets/img/blog/@item.Image" alt="">
+                                            </div>
+                                            <div class="rp__content">
+                                                <h3>
+                                                    <a asp-action="Detail" asp-route-id="@item.Id">
+                                                        @item.Title
+                                                    </a>
+                                                </h3>
+                                                <p>
+                                                    @item.ShortDesc
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- #right side -->
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <aside class="sidebar-widget">
+                        <section id="custom_html-5" class="widget_text widget widget_custom_html">
+                            <h2 class="widget-title">Follow Us</h2>
+                            <div class="textwidget custom-html-widget">
+                                <div class="widget-social">
+                                    <a href="@Model.Bio.Twitter"><i class="fab fa-twitter"></i></a>
+                                    <a href="@Model.Bio.Pinterst"><i class="fab fa-pinterest-p"></i></a>
+                                    <a href="@Model.Bio.Facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="@Model.Bio.Instagram"><i class="fab fa-instagram"></i></a>
+                                    <a href="@Model.Bio.WordPress"><i class="fab fa-wordpress"></i></a>
+                                </div>
+                            </div>
+                        </section>
+                        <section id="categories-1" class="widget widget_categories">
+                            <h2 class="widget-title">Categories</h2>
+                            <ul>
+                                @foreach (var item in ViewBag.MainCategories)
+                                {
+                                    <li class="cat-item cat-item-16"><a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></li>
+                                }
+                            </ul>
+                        </section>
+                        <section id="recent-posts-4" class="widget widget_recent_entries">
+                            <h2 class="widget-title">Recent Posts</h2>
+                            <ul>
+                                @foreach (var item in Model.Blogs)
+                                {
+                                    <li>
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Title</a>
+                                        <span class="post-date">@item.Date.ToString("MMMM dd yyyy")</span>
+                                    </li>
+                                }
+                            </ul>
+                        </section>
+                    
+                    </aside>
+                </div>
+                <!-- #right side end -->
+            </div>
+        </div>
+    </section>
+    <!-- inner-blog-end -->
+
+
+
+</main>
+<!-- main-area-end -->

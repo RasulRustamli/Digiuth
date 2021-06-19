@@ -1,0 +1,105 @@
+﻿@model OurEvent
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Update Event</h4>
+                <form class="forms-sample" enctype="multipart/form-data" method="post">
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Title">
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Photo"></label>
+                        <input asp-for="Photo" class="form-control" placeholder="Photo">
+                        <span asp-validation-for="Photo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" class="form-control" placeholder="Title">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartDate"></label>
+                        <input asp-for="StartDate" class="form-control" placeholder="StartDate">
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartTime"></label>
+                        <input asp-for="StartTime" class="form-control" placeholder="StartTime">
+                        <span asp-validation-for="StartTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndTime"></label>
+                        <input asp-for="EndTime" class="form-control" placeholder="EndTime">
+                        <span asp-validation-for="EndTime" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Organizer"></label>
+                        <input asp-for="Organizer" class="form-control" placeholder="Organizer">
+                        <span asp-validation-for="Organizer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="SeatCount"></label>
+                        <input asp-for="SeatCount" class="form-control" placeholder="SeatCount">
+                        <span asp-validation-for="SeatCount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Place"></label>
+                        <input asp-for="Place" class="form-control" placeholder="Place">
+                        <span asp-validation-for="Place" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Website"></label>
+                        <input asp-for="Website" class="form-control" placeholder="Website">
+                        <span asp-validation-for="Website" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Phone"></label>
+                        <input asp-for="Phone" class="form-control" placeholder="Phone">
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <h6>Select Main Category</h6>
+                        <select asp-for="MainCategoryId">
+                            @foreach (var item in ViewBag.MainCategory)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ShortDesc"></label>
+                        <input asp-for="ShortDesc" class="form-control" placeholder="ShortDesc">
+                        <span asp-validation-for="ShortDesc" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LongDesc"></label>
+                        <textarea asp-for="LongDesc" class="form-control" placeholder="LongDesc"></textarea>
+                        <span asp-validation-for="LongDesc" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Create</button>
+                    <a asp-action="Index" class="btn btn-danger">Index</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_Validation" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/21.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#LongDesc'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+}

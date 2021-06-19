@@ -1,0 +1,36 @@
+﻿@model StudentRegisterVM
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+
+<form method="post" class="digiuth_register">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input asp-for="Email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Full Name</label>
+        <input asp-for="FullName" class="form-control" aria-describedby="emailHelp" placeholder="Full name">
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">UserName</label>
+        <input asp-for="UserName" class="form-control" aria-describedby="emailHelp" placeholder="USer Name">
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input asp-for="Password" class="form-control" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input asp-for="ConfirmPassword" class="form-control" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <a asp-action="Login" class="btn btn-danger">Login</a>
+</form>

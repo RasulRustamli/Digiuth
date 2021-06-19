@@ -1,0 +1,151 @@
+﻿@model Course
+@{
+    ViewData["Title"] = "UpdateCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" style="margin:200px" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="exampleInputEmail1">Name</label>
+        <input asp-for="Name" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Photo</label>
+        <input asp-for="Photo" class="form-control" aria-describedby="emailHelp" placeholder="Photo">
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">ShortDesc</label>
+        <input asp-for="ShortDesc" class="form-control" aria-describedby="emailHelp" placeholder="ShortDesc">
+        <span asp-validation-for="ShortDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail1">LongDesc</label>
+        <input asp-for="LongDesc" class="form-control" aria-describedby="emailHelp" placeholder="LongDesc">
+        <span asp-validation-for="LongDesc" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">WhatYouWillLearn</label>
+        <input asp-for="WhatYouWillLearn" class="form-control" placeholder="WhatYouWillLearn">
+        <span asp-validation-for="WhatYouWillLearn" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">StartDate</label>
+        <input asp-for="StartDate" class="form-control" placeholder="StartDate">
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Duration</label>
+        <input asp-for="Duration" class="form-control" placeholder="Duration">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">ClassDuration</label>
+        <input asp-for="ClassDuration" class="form-control" placeholder="ClassDuration">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Institution</label>
+        <input asp-for="Institution" class="form-control" placeholder="Institution">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">SeatsAvailable</label>
+        <input asp-for="SeatsAvailable" class="form-control" placeholder="SeatsAvailable">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Level</label>
+        <input asp-for="Level" class="form-control" placeholder="Level">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Price</label>
+        <input asp-for="Price" class="form-control" placeholder="Price">
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Twitter</label>
+        <input asp-for="Twitter" class="form-control" placeholder="Twitter">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Facebook</label>
+        <input asp-for="Facebook" class="form-control" placeholder="Facebook">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Behance</label>
+        <input asp-for="Behance" class="form-control" placeholder="Behance">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Address</label>
+        <input asp-for="Address" class="form-control" placeholder="Address">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Website</label>
+        <input asp-for="Website" class="form-control" placeholder="Website">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Phone</label>
+        <input asp-for="Phone" class="form-control" placeholder="Phone">
+    </div>
+    <div class="form-group">
+        <label>Education Language</label>
+        <select asp-for="EducationLanguageId">
+            @foreach (var item in ViewBag.EdicationLanguage)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Main Category</label>
+        <select id="mainCategory" class="form-control">
+            <option value="0" selected disabled>Select Department</option>
+            @foreach (var item in ViewBag.MainCategory)
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Child Category</label>
+        <select asp-for="ChildCategoryId" id="childCategory" class="form-control">
+            <option value="0" selected disabled>Choose Doctor by Name</option>
+            @foreach (var item in ViewBag.ChildCategory)
+            {
+
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="phoneno-all-numeric-validation.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $(document).on("change", "#mainCategory", function () {
+                let id = $(this).val();
+                event.preventDefault();
+                $.ajax({
+                    url: "/Course/GetChildCategoriesByMainCategory?Id=" + id,
+                    type: "Get",
+                    success: function (res) {
+
+                        $("#childCategory").empty();
+                        //$("#doctor").html() = res;
+                        $("#childCategory").append(res);
+                        //$("#childCategory").prepend(`<option  value="${0}" selected disabled>Choose Doctor by Name</option>`)
+
+                    }
+
+                })
+            })
+        })
+    </script>
+}

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Amazon.S3;
 using Digiuth.DAL;
 using Digiuth.Models;
 using Microsoft.AspNetCore.Builder;
@@ -31,6 +32,7 @@ namespace Digiuth
             {
                 options.UseSqlServer(_config["ConnectionString:Default"]);
             });
+            services.AddAWSService<IAmazonS3>();
             services.AddIdentity<AppUser, IdentityRole>(identityOptions =>
             {
                 identityOptions.Password.RequiredLength = 6;

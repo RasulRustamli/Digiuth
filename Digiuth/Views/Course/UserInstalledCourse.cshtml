@@ -1,0 +1,80 @@
+﻿@model IEnumerable<UserCourse>
+@{
+    ViewData["Title"] = "UserInstalledCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<!-- main-area -->
+<main>
+
+    <!-- /search-popup -->
+    <!-- /search-popup -->
+    <!-- breadcrumb-area -->
+    <section class="breadcrumb-area d-flex align-items-center" style="background-image:url(../../assets/img/testimonial/test-bg.png)">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="breadcrumb-wrap text-left">
+                        <div class="breadcrumb-title">
+                            <h2> My Courses </h2>
+                            <div class="breadcrumb-wrap">
+
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                        <li class="breadcrumb-item active" aria-current="page">My Courses</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb-area-end -->
+    <!-- eventes-area -->
+    <section id="courses" class="eventes-area fix pt-120 pb-120" style=" background-image: url(../../assets/img/bg/event-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title center-align text-center mb-50">
+                        <h5>My Courses</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Course Name</th>
+                            <th scope="col">All Videos</th>
+                            <th scope="col">Settings</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <th scope="row">@count</th>
+                                <td><a asp-action="Detail" asp-route-id="@item.Id">@item.Course.Name</a></td>
+                                <td>
+                                    <a asp-controller="Video" asp-action="Index" asp-route-id="@item.Course.Id" asp-route-name="@item.Course.AppUser.UserName" style="color:blue">Here</a>
+                                </td>
+                                <td>
+                                    <a asp-action="DeleteCourse" asp-route-id="@item.Id" style="color:red">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <!-- eventes-area-end -->
+
+</main>
+<!-- main-area-end -->
