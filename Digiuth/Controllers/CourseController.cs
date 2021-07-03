@@ -2,6 +2,7 @@
 using Digiuth.Extentions;
 using Digiuth.Models;
 using Digiuth.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -43,7 +44,7 @@ namespace Digiuth.Controllers
             };
             return View(course);
         }
-
+        [Authorize(Roles = "Teacher")]
         public IActionResult Create()
         {
             ViewBag.EdicationLanguage = _db.EducationLanguages.ToList();
@@ -51,7 +52,7 @@ namespace Digiuth.Controllers
             ViewBag.MainCategory = _db.MainCategories.ToList();
             return View();
         }
-
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Course course)
@@ -99,6 +100,7 @@ namespace Digiuth.Controllers
             newCourse.Address = course.Address;
             newCourse.Phone = course.Phone;
             newCourse.IsVerified = false;
+            newCourse.IsFeatured = false;
 
 
             newCourse.AppUserId = user.Id;
@@ -112,7 +114,10 @@ namespace Digiuth.Controllers
 
         public IActionResult Detail(int? id)
         {
-            ViewBag.MainCategories = _db.MainCategories.ToList();
+           ViewBag.MainCategories = _db.MainCategories.ToList();
+          
+           ViewBag.IsInstalled = _db.UserCourses.Any(x => x.AppUser.UserName == User.Identity.Name&&x.CourseId==id);
+           
             if (id == null) return NotFound();
             Course course =  _db.Courses.Include(x=>x.AppUser)
                 .Include(x=>x.ChildCategory)
@@ -129,12 +134,13 @@ namespace Digiuth.Controllers
             var childCategories = _db.ChildCategories.Where(x=>x.MainCategoryId==id).ToList();
             return PartialView("_getChildCategoriesByMainPartial",childCategories);
         }
-
+        [Authorize(Roles ="Teacher")]
         public async Task<IActionResult> MyCourses()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             return View(_db.Courses.Where(p => p.AppUserId==user.Id).ToList());
         }
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> UserInstalledCourse()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -143,26 +149,35 @@ namespace Digiuth.Controllers
                 .Include(x=>x.Course)
                 .ThenInclude(x=>x.AppUser).ToList());
         }
-
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> DeleteCourse(int? id)
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (id == null) return NotFound();
-            Course course = await _db.Courses.FindAsync(id);
+           var course = await _db.UserCourses.FindAsync(id);          
             if (course == null) return NotFound();
+
+            var userWatchedVideo = _db.WatchedVideos
+                .Where(x => x.CourseId == course.Id && x.UserId == user.Id.ToString()).ToList();
+            foreach (var item in userWatchedVideo)
+            {
+                _db.WatchedVideos.Remove(item);
+            }
+
             if (course.AppUserId==user.Id)
             {
-                _db.Courses.Remove(course);
+                
+                _db.UserCourses.Remove(course);
             }
             else
             {
-                return RedirectToAction("MyCourses", "Course");
+                return RedirectToAction("Home", "Index");
             }
             
             await _db.SaveChangesAsync();
-            return RedirectToAction("MyCourses", "Course");
+            return RedirectToAction("UserInstalledCourse", "Course");
         }
-
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> UpdateCourse(int? id)
         {
             ViewBag.EdicationLanguage = _db.EducationLanguages.ToList();
@@ -173,7 +188,7 @@ namespace Digiuth.Controllers
             if (course == null) return NotFound();
             return View(course);
         }
-
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateCourse(Course course, int? id)
@@ -238,13 +253,13 @@ namespace Digiuth.Controllers
             }
             return RedirectToAction("MyCourses", "Course");
         }
-
-        public IActionResult AddContent(int? id)
+        [Authorize(Roles = "Teacher")]
+        public IActionResult AddContent(int?id)
         {
             ViewBag.CourseId = id;
             return View();
         }
-
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddContent(CourseContent courseContent, int CourseId)
@@ -259,7 +274,7 @@ namespace Digiuth.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Detail", "Course", new { @id = CourseId });
         }
-
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteContent(int? id)
         {
             if (id == null) return NotFound();

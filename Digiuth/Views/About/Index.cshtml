@@ -150,7 +150,7 @@
                                 </div>
                             </div>
                             <div class="team-info">
-                                <h4><a href="team-details.html">@item.FullName</a></h4>
+                                <h4><a asp-controller="Team" asp-action="Detail" asp-route-id="@item.Id">@item.FullName</a></h4>
                                 <span>@item.Position</span>
                                 <div class="team-social mt-20">
                                     <a href="@item.Facebook"><i class="fab fa-facebook-f"></i></a>

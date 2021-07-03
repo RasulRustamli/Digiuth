@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Digiuth.Models
@@ -10,6 +11,7 @@ namespace Digiuth.Models
         public string Title { get; set; }
         public string Image { get; set; }
         public DateTime Date { get; set; }
+        [MaxLength(110)]
         public string ShortDesc { get; set; }
         public string LongDesc { get; set; }
         public string AuthorName { get; set; }

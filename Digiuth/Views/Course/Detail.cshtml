@@ -6,24 +6,7 @@
 <!-- main-area -->
 <main>
     <input type="hidden" id="hidden" value="course" />
-   <!-- search-popup -->
-    <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content search-popup">
-                <div class="text-center">
-                    <a href="#" class="close2" data-dismiss="modal" aria-label="Close">× close</a>
-                </div>
-                <div class="row search-outer">
-                    <div class="col-md-11"><input type="text" placeholder="Search for products..." /></div>
-                    <div class="col-md-1 text-right">
-                        <a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- /search-popup -->
-    <!-- /search-popup -->
+  
     <!-- breadcrumb-area -->
     <section class="breadcrumb-area d-flex align-items-center"
              style="background-image:url(../../assets/img/testimonial/test-bg.png)">
@@ -79,13 +62,7 @@
                                 <p>$ @Model.Price</p>
                             </li>
                         </ul>
-                        @*<div class="video-img wow fadeInRight animated" data-animation="fadeInDown animated"
-                                 data-delay=".2s"
-                                 style="background-image:url(../../assets/img/course/@Model.Image); background-repeat: no-repeat; background-position: center;">
-                                <a href="@Model.CourseVideos.FirstOrDefault(x=>x.IsPreview)" class="video-i popup-video">
-                                    <img src="~/assets/img/video/play.svg" alt="img" class="active-icon">
-                                </a>
-                            </div>*@
+                      
                         <video class="detail-video" controls="controls">
                             <source src="@Model.CourseVideos.FirstOrDefault(x=>x.IsPreview).AwsVideoUrl" type="video/ogg" />
                         </video>
@@ -156,13 +133,24 @@
                                         </li>
                                     </ul>
                                     <h5 class="pt-20 pb-20">Course Price: <span>$ @Model.Price</span></h5>
-                                    @if (User.Identity.Name == null)
+                                    @if (!User.IsInRole("Teacher"))
                                     {
-                                        <a class="btn ss-btn" asp-controller="Auth" asp-action="Login">Buy Now</a>
-                                    }
-                                    else
-                                    {
-                                        <a class="btn ss-btn" asp-controller="UserCourse" asp-action="Create" asp-route-id="@Model.Id">Buy Now</a>
+                                        @if (User.Identity.Name == null)
+                                        {
+                                            <a class="btn ss-btn" asp-controller="Auth" asp-action="Login">Buy Now</a>
+                                        }
+                                        else
+                                        {
+                                            if (ViewBag.IsInstalled)
+                                            {
+                                                <button disabled class="btn ss-btn">Installed</button>
+                                            }
+                                            else
+                                            {
+                                                <a class="btn ss-btn" asp-controller="UserCourse" asp-action="Create" asp-route-id="@Model.Id">Buy Now</a>
+                                            }
+
+                                        }
                                     }
 
 

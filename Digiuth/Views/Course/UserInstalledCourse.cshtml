@@ -44,34 +44,41 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Course Name</th>
-                            <th scope="col">All Videos</th>
-                            <th scope="col">Settings</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            count++;
+            @if (Model.Count() > 0)
+            {
+                <div class="row">
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <th scope="row">@count</th>
-                                <td><a asp-action="Detail" asp-route-id="@item.Id">@item.Course.Name</a></td>
-                                <td>
-                                    <a asp-controller="Video" asp-action="Index" asp-route-id="@item.Course.Id" asp-route-name="@item.Course.AppUser.UserName" style="color:blue">Here</a>
-                                </td>
-                                <td>
-                                    <a asp-action="DeleteCourse" asp-route-id="@item.Id" style="color:red">Delete</a>
-                                </td>
+                                <th scope="col">#</th>
+                                <th scope="col">Course Name</th>
+                                <th scope="col">All Videos</th>
+                                <th scope="col">Settings</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                count++;
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td><a asp-action="Detail" asp-route-id="@item.Id">@item.Course.Name</a></td>
+                                    <td>
+                                        <a asp-controller="Video" asp-action="Index" asp-route-id="@item.Course.Id" asp-route-name="@item.Course.AppUser.UserName" style="color:blue">Here</a>
+                                    </td>
+                                    <td>
+                                        <a asp-action="DeleteCourse" asp-route-id="@item.Id" style="color:red">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+        <div class="row"> <h3>Empty List</h3></div>
+            }
         </div>
     </section>
     <!-- eventes-area-end -->

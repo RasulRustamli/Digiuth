@@ -26,6 +26,7 @@ namespace Digiuth.Models
         public bool IsVerified { get; set; }
         public string Website { get; set; }
         public string Phone { get; set; }
+        public bool IsFeatured{ get; set; }
         public string Image { get; set; }
         [NotMapped]
         public IFormFile Photo { get; set; }

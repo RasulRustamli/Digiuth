@@ -4,6 +4,7 @@ using Digiuth.DAL;
 using Digiuth.Extentions;
 using Digiuth.Models;
 using Digiuth.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -39,20 +40,60 @@ namespace Digiuth.Controllers
             _env = env;
             this.AmazonS3 = amazonS3;
         }
-
-        public IActionResult Index(int id,string name)
+        [Authorize]
+        public async Task<IActionResult> Index(int id,string name)
         {
-            
+            //get current user
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //check is course installed
+            var userCourses =await  _db.UserCourses
+                .FirstOrDefaultAsync(x=>x.CourseId==id&&x.AppUserId==user.Id);
+            if (userCourses==null)
+            {
+                return RedirectToAction("Index", "Course");
+            }
+          
+            //get watchedlist
+            var watchedList = _db.WatchedVideos
+                .Where(x=>x.CourseId==id&&x.UserId==user.Id.ToString())
+                .ToList();
+            CourseVideo video = new CourseVideo();
+            if (watchedList.Count()==0)
+            {
+                 video = _db.CourseVideos
+                .FirstOrDefault(x => x.IsPreview == false && x.CourseId == id &&
+                x.Course.AppUser.UserName == name);   
+            }           
+            else
+            {
+                UserWatchedVideo watchedVideo = _db.WatchedVideos.OrderByDescending(x=>x.Id)
+                    .FirstOrDefault(x=>x.UserId==user.Id.ToString()&& x.CourseId == id);
+                var videos = _db.CourseVideos
+                    .Where(x => x.IsPreview == false && x.CourseId == id&& x.Course.AppUser.UserName == name).ToList();
+                int index = videos.FindIndex(a => a.Id == watchedVideo.VideoId);
+
+                if (videos.Count>index+1)
+                {
+                    video = videos[index + 1];
+                }
+                else
+                {
+                    video = videos[index];
+                }
+
+            }
             var videoVM = new VideoVM
             {
                 CourseVideos = _db.CourseVideos
                 .Where(x => x.IsPreview == false && x.CourseId == id &&
                 x.Course.AppUser.UserName==name
                 ).ToList(),
+                CourseVideo=video,
+
                 MainCategories = _db.MainCategories.ToList(),
                 Course = _db.Courses.FirstOrDefault(x => x.Id == id)
             };
-            return View(videoVM);
+              return View(videoVM);
         }
 
         public IActionResult Create(int id)
@@ -143,5 +184,52 @@ namespace Digiuth.Controllers
             string url = AmazonS3.GetPreSignedURL(request);
             return url;
         }
+
+        public async Task<IActionResult> GetVideoById(int id,int CourseId)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var dbWatchedVideo = _db.WatchedVideos.FirstOrDefault(x=>x.VideoId==id&&x.UserId==user.Id.ToString());
+            if (dbWatchedVideo==null)
+            {
+                UserWatchedVideo watchedVideo = new UserWatchedVideo
+                {
+                    UserId = user.Id.ToString(),
+                    VideoId = id,
+                    CourseId = CourseId
+                };
+                _db.WatchedVideos.Add(watchedVideo);
+                _db.SaveChanges();
+            }
+            var videos = _db.CourseVideos
+                .Where(x => x.IsPreview == false && x.CourseId==CourseId).ToList();
+            
+            int index = videos.FindIndex(a => a.Id == id);
+            var video = videos[index+1];
+            if (video==null)
+            {
+                video = videos[index];
+            }
+           
+            return PartialView("_nextVideo", video);
+        }
+
+        //public async Task<IActionResult> GetPreviousVideo(int id, int CourseId)
+        //{
+        //   // var dbWatchedVideo = _db.WatchedVideos.FirstOrDefault(x => x.VideoId == id);
+           
+        //    var videos = _db.CourseVideos
+        //        .Where(x => x.IsPreview == false && x.CourseId == CourseId).ToList();
+        //   // var video = videos.FirstOrDefault(x=>x.Id==dbWatchedVideo.VideoId);
+
+
+        //    int index = videos.FindIndex(a => a.Id == id);
+        //    var video = videos[index - 1];
+        //    if (video == null)
+        //    {
+        //        video = videos[index];
+        //    }
+        //    return PartialView("_nextVideo", video);
+        //}
+
     }
 }

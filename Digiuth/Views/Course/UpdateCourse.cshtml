@@ -97,7 +97,7 @@
     <div class="form-group">
         <label>Main Category</label>
         <select id="mainCategory" class="form-control">
-            <option value="0" selected disabled>Select Department</option>
+            <option value="0" selected disabled>Select Main Category</option>
             @foreach (var item in ViewBag.MainCategory)
             {
                 <option value="@item.Id">@item.Name</option>
@@ -108,7 +108,7 @@
     <div class="form-group">
         <label>Child Category</label>
         <select asp-for="ChildCategoryId" id="childCategory" class="form-control">
-            <option value="0" selected disabled>Choose Doctor by Name</option>
+            <option value="0" selected disabled>Choose Child by Name</option>
             @foreach (var item in ViewBag.ChildCategory)
             {
 

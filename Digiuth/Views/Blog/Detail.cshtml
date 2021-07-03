@@ -135,8 +135,10 @@
                                 @foreach (var item in Model.Blogs)
                                 {
                                     <li>
-                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Title</a>
-                                        <span class="post-date">@item.Date.ToString("MMMM dd yyyy")</span>
+                                        <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">@item.Title
+                                            <span class="post-date">@item.Date.ToString("MMMM dd yyyy")</span>
+                                        </a>
+                                        
                                     </li>
                                 }
                             </ul>

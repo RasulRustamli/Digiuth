@@ -14,6 +14,7 @@ namespace Digiuth.Models
         public string Position { get; set; }
         public string Twitter { get; set; }
         public string Facebook { get; set; }
+        public bool IsTeacher { get; set; }
         public string Address { get; set; }
         public string Website { get; set; }
         public string Phone { get; set; }

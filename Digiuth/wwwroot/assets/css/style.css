@@ -2,10 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 
-.co1urse-video-link{
-    max-height:53%;
-    overflow-y:scroll;
-
+.co1urse-video-link {
+    max-height: 53%;
+    overflow-y: scroll;
 }
 
 .fa-play {
@@ -31,21 +30,24 @@
     color: white;
     border-radius: 10px;
 }
-.video-active .video-duration {
-    color:white;
-    
-}
+
+    .video-active .video-duration {
+        color: white;
+    }
+
 .video-duration {
     font-weight: bold;
     color: #9CCA46
 }
+
 .detail-video {
     width: 100%;
     height: 400px;
     object-fit: cover;
 }
-.video-list-li{
-    padding:5px 10px;
+
+.video-list-li {
+    padding: 5px 10px;
 }
 
 /* Video style */
@@ -4194,13 +4196,15 @@ section:hover .section-title h2::before {
 .blog-thumb {
     position: relative;
 }
-.bsingle__post-thumb{
-    height:350px;
-}
-.bsingle__post-thumb img {
-    width: 100%;
+
+.bsingle__post-thumb {
     height: 350px;
 }
+
+    .bsingle__post-thumb img {
+        width: 100%;
+        height: 350px;
+    }
 
 .bsingle__post .video-p {
     position: relative;
@@ -5269,6 +5273,20 @@ li.sub.has-mega-menu:hover > ul {
     li.has-mega-menu:hover > ul {
         grid-template-columns: repeat(auto-fit,minmax(25%, 1fr));
     }
+
+    .digiuth_register, .digiuth_login {
+        width: 40vw !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    li.has-mega-menu:hover > ul {
+        grid-template-columns: repeat(auto-fit,minmax(25%, 1fr));
+    }
+
+    .digiuth_register, .digiuth_login {
+        width: 60vw;
+    }
 }
 
 @media screen and (min-width: 600px) {
@@ -5284,6 +5302,13 @@ li.sub.has-mega-menu:hover > ul {
 @media screen and (min-width: 992px) {
     li.mega-menu-column {
         flex: 1 0 calc(33.333%);
+    }
+}
+
+@media only screen and (max-width:480px) {
+    .btn-full {
+        width: 100% !important;
+        margin-bottom: 10px;
     }
 }
 
@@ -7559,7 +7584,8 @@ p.checkout-coupon input[type="text"] {
 .digiuth_register,
 .digiuth_login {
     margin: 10% auto;
-    width: 40vw;
+    margin-top: 90px;
+    /*width: 40vw;*/
     background: #fdfdfd;
     padding: 24px;
     border-radius: 6px;
@@ -8178,13 +8204,11 @@ p.checkout-coupon input[type="text"] {
             padding-right: 30px;
         }
 
-        .project-detail .text-column .inner-column .dropcap {
+            .project-detail .text-column .inner-column .dropcap {
                 float: left;
                 background: #9CCA46 0% 0% no-repeat padding-box;
                 border-radius: 20px;
-              
                 color: #FFFFFF;
-              
                 font-weight: 700;
                 margin-right: 20px;
                 padding: 11px;

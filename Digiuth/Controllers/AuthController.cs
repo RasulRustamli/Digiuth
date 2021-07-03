@@ -73,10 +73,10 @@ namespace Digiuth.Controllers
             }
 
 
-            if (appUser.Image==null || appUser.FullName==null)
-            {
-                return RedirectToAction("UpdateProfile", "Auth");
-            }
+            //if (appUser.Image==null || appUser.FullName==null)
+            //{
+            //    return RedirectToAction("UpdateProfile", "Auth");
+            //}
 
             return RedirectToAction("Index", "Home");
         }
@@ -100,7 +100,8 @@ namespace Digiuth.Controllers
             {
                 FullName = register.FullName,
                 UserName = register.UserName,
-                Email = register.Email
+                Email = register.Email,
+                IsTeacher=true
             };
 
             IdentityResult identityResult = await _userManager.CreateAsync(newUser, register.Password);
@@ -201,7 +202,7 @@ namespace Digiuth.Controllers
                 user.Address = update.Address;
             }
             await _db.SaveChangesAsync();
-            await _signInManager.SignOutAsync();
+           // await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
 

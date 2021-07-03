@@ -203,66 +203,18 @@
 
                     <div class="featured-courses-active">
 
+                        @foreach (var item in Model.Courses)
+                        {
                         <div class="box-courses">
-                            <a href="courses-details.html">
-                                <img src="~/assets/img/featured-courses/courses-img1.png"
+                            <a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">
+                                <img src="~/assets/img/course/@item.Image"
                                      alt="courses-img1">
-                            </a>
-                            <div class="text">
-                                <h5>3 Years</h5>
-                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
-                            </div>
+                             </a>
+                                <div class="text">
+                                    <h3><a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></h3>
+                                </div>
                         </div>
-                        <div class="box-courses">
-                            <a href="courses-details.html">
-                                <img src="~/assets/img/featured-courses/courses-img2.png"
-                                     alt="courses-img1">
-                            </a>
-                            <div class="text">
-                                <h5>3 Years</h5>
-                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
-                            </div>
-                        </div>
-                        <div class="box-courses">
-                            <a href="courses-details.html">
-                                <img src="~/assets/img/featured-courses/courses-img3.png"
-                                     alt="courses-img1">
-                            </a>
-                            <div class="text">
-                                <h5>3 Years</h5>
-                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
-                            </div>
-                        </div>
-                        <div class="box-courses">
-                            <a href="courses-details.html">
-                                <img src="~/assets/img/featured-courses/courses-img4.png"
-                                     alt="courses-img1">
-                            </a>
-                            <div class="text">
-                                <h5>3 Years</h5>
-                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
-                            </div>
-                        </div>
-                        <div class="box-courses">
-                            <a href="courses-details.html">
-                                <img src="~/assets/img/featured-courses/courses-img5.png"
-                                     alt="courses-img1">
-                            </a>
-                            <div class="text">
-                                <h5>3 Years</h5>
-                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
-                            </div>
-                        </div>
-                        <div class="box-courses">
-                            <a href="courses-details.html">
-                                <img src="~/assets/img/featured-courses/courses-img1.png"
-                                     alt="courses-img1">
-                            </a>
-                            <div class="text">
-                                <h5>3 Years</h5>
-                                <h3><a href="courses-details.html">Civil Engeering</a></h3>
-                            </div>
-                        </div>
+                        }
 
                     </div>
 
@@ -396,7 +348,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="single-post2 mb-30  wow fadeInDown  animated">
                             <div class="blog-thumb2">
-                                <a href="blog-details.html"><img src="~/assets/img/blog/@item.Image" alt="img"></a>
+                               <img src="~/assets/img/blog/@item.Image" alt="img">
                             </div>
                             <div class="blog-content2 text-center">
                                 <div class="b-meta">

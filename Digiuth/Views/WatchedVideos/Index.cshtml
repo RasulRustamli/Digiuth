@@ -1,0 +1,228 @@
+﻿@model VideoVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- breadcrumb-area -->
+<section class="breadcrumb-area d-flex align-items-center"
+         style="background-image:url(../../assets/img/testimonial/test-bg.png)">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-xl-12 col-lg-12">
+                <div class="breadcrumb-wrap text-left">
+                    <div class="breadcrumb-title">
+                        <h2>All Watched Videos</h2>
+                        <div class="breadcrumb-wrap">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a asp-controller="home" asp-action="Index">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">All Videos</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb-area-end -->
+<!-- main-area -->
+<section class="video mt-5 pt-5">
+    <div class="container">
+        @if (Model.UserWatchedVideos.Count() > 0)
+        {
+            <div class="row align-items-center">
+                <div class="col-lg-12 col-md-12">
+                    <div class="about-title text-center second-atitle pb-20">
+                        <h5>Lessons</h5>
+                        <h2>
+                            @Model.Course.Name
+                        </h2>
+                        <h3 id="timer" style="background-color:#9CCA46;color:white;border-radius:20px;width:200px">
+                        </h3>
+                        <input type="hidden" id="courseId" name="d" value="@Model.Course.Id" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div style="cursor:pointer;" class="col-xl-8" id="parentVideo">
+
+                    <video id="video" class="w-100" controlsList="nodownload" controls data-id="@Model.UserWatchedVideos.ElementAt(0).Id">
+                        <source data-id="@Model.UserWatchedVideos.ElementAt(0).Duration" id="sourceVideo" src="@Model.UserWatchedVideos.ElementAt(0).AwsVideoUrl" type="video/ogg">
+                    </video>
+                </div>
+                <div class="col-xl-4 mt-3">
+                    <h5 class="course-video-title">Kurs İçeriği </h5>
+                    <ul class="co1urse-video-link">
+                        @for (int i = 0; i < Model.UserWatchedVideos.Count(); i++)
+                        {
+                            <li class="d-flex justify-content-between video-list-li @(i==0 ? "video-active" : "") " style="cursor:pointer;">
+                                <span>
+                                    @Model.UserWatchedVideos.ElementAt(i).Title
+                                </span>
+                                <a class="d-none">@Model.UserWatchedVideos.ElementAt(i).AwsVideoUrl</a>
+                                <span class="video-duration">
+                                    @Model.UserWatchedVideos.ElementAt(i).Duration
+                                </span>
+                            </li>
+                        }
+                    </ul>
+                    <div class="row">
+                        @if (Model.VideoCount == Model.UserWatchedVideos.Count())
+                        {
+                        <div class="col-lg-8 col-md-12">
+
+                            <input type="hidden" id="certificateCourseId" value="@Model.Course.Id" />
+                            <input type="hidden" id="certificateCourseName" value="@Model.Course.Name" />
+                            <input type="hidden" id="certificateTeacherName" value="@Model.Course.AppUser.FullName" />
+                            
+                            <form method="post" class="certicate-form">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="contact-field p-relative c-name mb-20">
+                                            <input asp-for="Certificate.FirstName" id="firstn" name="firstn" class="firstName" placeholder="First Name">
+                                            <span asp-validation-for="Certificate.FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="contact-field p-relative c-email mb-20">
+                                            <input asp-for="Certificate.LastName" id="lastn" name="lastn" class="lastName" placeholder="Last Name">
+                                            <span asp-validation-for="Certificate.LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Generate Sertificate</button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+        }
+        else
+        {
+    <div class="row"><h3>Empty list</h3></div>
+        }
+    </div>
+</section>
+
+
+<!-- services-area -->
+<section id="services" class="services-area pt-120 pb-120 fix"
+         style=" background-image: url(../../assets/img/bg/services-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
+    <div class="container">
+
+        <div class="row align-items-center">
+            <div class="col-lg-12 col-md-12">
+                <div class="about-title text-center second-atitle pb-20">
+                    <h5>Services</h5>
+                    <h2>
+                        What We Provide To You
+                    </h2>
+                </div>
+            </div>
+
+            <div class="row">
+                @foreach (var item in Model.MainCategories)
+                {
+                    <div class="col-lg-3 col-md-6">
+                        <div class="services-box wow fadeInDown  animated" data-delay=".5s">
+                            <div class="services-icon">
+                                <img src="~/assets/img/category/@item.PhotoUrl" alt="icon01">
+                            </div>
+                            <div class="services-content2">
+                                <h5><a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a> </h5>
+                                <p>@item.ShortDesc</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+<!-- services-area-end -->
+<!-- main-area-end -->
+@section Scripts{
+    <script>
+        let video = document.getElementById("video");
+        let previewVideoDurationArray = document.getElementById("sourceVideo").getAttribute("data-id").split(":");
+        let listLi = document.querySelectorAll(".video-list-li");
+
+        listLi.forEach(item => {
+            item.addEventListener("click", function (e) {
+                listLi.forEach(a => {
+                    a.classList.remove("video-active");
+                })
+                item.classList.add("video-active");
+                reCreateVideoTagWithNewSrc(item);
+            })
+        });
+
+
+        function reCreateVideoTagWithNewSrc(item) {
+
+            document.getElementById("parentVideo").innerHTML = "";
+            document.getElementById("parentVideo").innerHTML = `
+                    <video id="video" class="w-100" controls controlsList="nodownload">
+                       <source id="sourceVideo" src="${item.firstElementChild.nextElementSibling.innerHTML}" type="video/ogg"></video>`;
+
+        }
+    </script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        $(document).ready(function () {
+            $(".certicate-form").submit(function (e) {
+                e.preventDefault();
+                let formData = {
+                    FirstName: $(".firstName").val(),
+                    LastName: $(".lastName").val(),
+                    CourseName: $("#certificateCourseName").val(),
+                    CourseId: $("#certificateCourseId").val(),
+                    TeacherName: $("#certificateTeacherName").val()
+                };
+                $.ajax({
+                    url: "/watchedvideos/Index",
+                    type: "post",
+                    data: formData,
+                    success: function (response) {
+                        if (response) {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'You generated your certificate before',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function (result) {
+                                $(".firstName").val("");
+                                $(".lastName").val("");
+                            })
+                        } else {
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Your certificate has generated',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function (result) {
+                                // document.getElementsByClassName("cbr-alert")[0].style.display = "none"
+                                $(".firstName").val("");
+                                $(".lastName").val("");
+                            })
+                        }
+                    },
+                    error: function (error) { }
+                })
+            })
+        });
+    </script>
+}

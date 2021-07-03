@@ -63,9 +63,8 @@
                                 <h4><a asp-action="Detail" asp-route-id="@item.Id" >@item.FullName</a></h4>
                                 <span>@item.Position</span>
                                 <div class="team-social mt-20">
-                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i class="fab fa-twitter"></i></a>
-                                    <a href="#"><i class="fab fa-behance"></i></a>
+                                    <a href="@item.Facebook"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="@item.Twitter"><i class="fab fa-twitter"></i></a>
                                 </div>
                             </div>
                         </div>

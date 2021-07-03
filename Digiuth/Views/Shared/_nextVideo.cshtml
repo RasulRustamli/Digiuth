@@ -1,0 +1,44 @@
+﻿@model CourseVideo
+
+<video id="video" class="w-100" controlsList="nodownload" controls data-id="@Model.Id">
+    <source data-id="@Model.Duration" id="sourceVideo" src="@Model.AwsVideoUrl" type="video/ogg">
+</video>
+
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        let video = document.getElementById("video");
+        let previousVideo = document.getElementById("previousVideo");
+        video.addEventListener('ended', () => {
+            let dataId = parseInt(video.getAttribute("data-id"));
+           // formData.append("Id", dataId);
+            let courseId= document.getElementById("courseId").value;
+            //alert(dataId)
+            $.ajax({
+                url:  `/Video/GetVideoById?Id=${dataId}&CourseId=${courseId}`,
+                type: "Get",
+                success: function (res) {
+                    $("#parentVideo").empty();
+                    $("#parentVideo").append(res);
+
+                }
+            })
+        });
+
+        //previousVideo.addEventListener('click', () => {
+        //    let dataId = parseInt(video.getAttribute("data-id"));
+        //    // formData.append("Id", dataId);
+        //    let courseId = document.getElementById("courseId").value;
+        //    //alert(dataId)
+        //    $.ajax({
+        //        url: `/Video/GetPreviousVideo?Id=${dataId}&CourseId=${courseId}`,
+        //        type: "Get",
+        //        success: function (res) {
+        //            $("#parentVideo").empty();
+        //            $("#parentVideo").append(res);
+
+        //        }
+        //    })
+        //});
+    </script>

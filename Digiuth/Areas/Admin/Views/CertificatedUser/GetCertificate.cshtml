@@ -1,0 +1,25 @@
+﻿@model Certificate
+@{
+    ViewData["Title"] = "GetCertificate";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="container-c">
+                    <iframe data-target-code="@Model.CertificateCode" class="responsive-iframe" data-target-course="@Model.CourseName" data-target-name="@Model.FirstName @Model.LastName"
+                            data-target-date="@Model.EndDate.ToString("dd MMMM yyyy")" id="cert" src="" \ style="border: 0;"></iframe>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts{
+    <script src="~/admin/js/pdflib.js"></script>
+    <script src="~/admin/js/FileSaver.js"></script>
+    <script src="~/admin/js/index.js"></script>
+}
+

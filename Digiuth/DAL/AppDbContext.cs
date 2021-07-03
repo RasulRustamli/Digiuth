@@ -24,6 +24,9 @@ namespace Digiuth.DAL
         public DbSet<CourseContent> CourseContents { get; set; }
         public DbSet<CourseVideo> CourseVideos { get; set; }
         public DbSet<UserCourse> UserCourses { get; set; }
+        public DbSet<UserWatchedVideo> WatchedVideos { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

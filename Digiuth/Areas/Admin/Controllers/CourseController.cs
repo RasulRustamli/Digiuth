@@ -61,5 +61,25 @@ namespace Digiuth.Areas.Admin.Controllers
             if (course == null) return NotFound();
             return View(course);
         }
+
+    public async Task<IActionResult> ActiveFeature(int? id, bool IsFeatured)
+    {
+        if (id == null) return NotFound();
+        Course course = await _db.Courses.FindAsync(id);
+        if (course == null) return NotFound();
+        course.IsFeatured = IsFeatured;
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
+
+    public async Task<IActionResult> DeactiveFeature(int? id, bool IsFeatured)
+    {
+        if (id == null) return NotFound();
+        Course course = await _db.Courses.FindAsync(id);
+        if (course == null) return NotFound();
+        course.IsFeatured = !IsFeatured;
+        await _db.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
+    }
+}
 }

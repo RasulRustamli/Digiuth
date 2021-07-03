@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Digiuth.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210615104000_addedTitleToCourseVideo")]
-    partial class addedTitleToCourseVideo
+    [Migration("20210702103345_addIsVerifiendtoCertificatee")]
+    partial class addIsVerifiendtoCertificatee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,6 +98,9 @@ namespace Digiuth.Migrations
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsTeacher")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
@@ -255,6 +258,47 @@ namespace Digiuth.Migrations
                     b.ToTable("Blogs");
                 });
 
+            modelBuilder.Entity("Digiuth.Models.Certificate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CertificateCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CourseName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsVerified")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TeacherName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Certificates");
+                });
+
             modelBuilder.Entity("Digiuth.Models.ChildCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -372,6 +416,9 @@ namespace Digiuth.Migrations
                     b.Property<string>("Institution")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsFeatured")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsVerified")
                         .HasColumnType("bit");
 
@@ -480,6 +527,7 @@ namespace Digiuth.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -715,6 +763,49 @@ namespace Digiuth.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Digiuth.Models.UserCourse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("UserCourses");
+                });
+
+            modelBuilder.Entity("Digiuth.Models.UserWatchedVideo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VideoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WatchedVideos");
+                });
+
             modelBuilder.Entity("Digiuth.Models.WatchUs", b =>
                 {
                     b.Property<int>("Id")
@@ -941,6 +1032,19 @@ namespace Digiuth.Migrations
                     b.HasOne("Digiuth.Models.MainCategory", "MainCategory")
                         .WithMany("Events")
                         .HasForeignKey("MainCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Digiuth.Models.UserCourse", b =>
+                {
+                    b.HasOne("Digiuth.Models.AppUser", "AppUser")
+                        .WithMany("UserCourses")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("Digiuth.Models.Course", "Course")
+                        .WithMany("UserCourses")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -2,12 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>3aee7dac-2a10-4800-b9da-5767a0d192d4</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Migrations\20210615103700_addingTitleCourseVideoModel.cs" />
-    <Compile Remove="Migrations\20210615103700_addingTitleCourseVideoModel.Designer.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\assets\font-flaticon\._Flaticon.svg" />

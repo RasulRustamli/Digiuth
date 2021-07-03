@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Digiuth.Migrations
 {
-    public partial class AddData : Migration
+    public partial class addIsVerifiendtoCertificatee : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,6 +63,7 @@ namespace Digiuth.Migrations
                     Position = table.Column<string>(nullable: true),
                     Twitter = table.Column<string>(nullable: true),
                     Facebook = table.Column<string>(nullable: true),
+                    IsTeacher = table.Column<bool>(nullable: false),
                     Address = table.Column<string>(nullable: true),
                     Website = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
@@ -95,6 +96,27 @@ namespace Digiuth.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Bios", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Certificates",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    TeacherName = table.Column<string>(nullable: true),
+                    CourseName = table.Column<string>(nullable: true),
+                    EndDate = table.Column<DateTime>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true),
+                    CourseId = table.Column<int>(nullable: false),
+                    IsVerified = table.Column<bool>(nullable: false),
+                    CertificateCode = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Certificates", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,6 +195,21 @@ namespace Digiuth.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Testimonials", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WatchedVideos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    VideoId = table.Column<int>(nullable: false),
+                    CourseId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WatchedVideos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -382,7 +419,6 @@ namespace Digiuth.Migrations
                     ShortDesc = table.Column<string>(nullable: true),
                     LongDesc = table.Column<string>(nullable: true),
                     WhatYouWillLearn = table.Column<string>(nullable: true),
-                    VideoUrl = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false),
                     Duration = table.Column<string>(nullable: true),
                     ClassDuration = table.Column<string>(nullable: true),
@@ -397,6 +433,7 @@ namespace Digiuth.Migrations
                     IsVerified = table.Column<bool>(nullable: false),
                     Website = table.Column<string>(nullable: true),
                     Phone = table.Column<string>(nullable: true),
+                    IsFeatured = table.Column<bool>(nullable: false),
                     Image = table.Column<string>(nullable: true),
                     AppUserId = table.Column<string>(nullable: true),
                     ChildCategoryId = table.Column<int>(nullable: false),
@@ -426,6 +463,26 @@ namespace Digiuth.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CourseContents",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Content = table.Column<string>(nullable: false),
+                    CourseId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseContents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseContents_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CourseSubjects",
                 columns: table => new
                 {
@@ -439,6 +496,55 @@ namespace Digiuth.Migrations
                     table.PrimaryKey("PK_CourseSubjects", x => x.Id);
                     table.ForeignKey(
                         name: "FK_CourseSubjects_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseVideos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: false),
+                    CourseId = table.Column<int>(nullable: false),
+                    AwsVideoUrl = table.Column<string>(nullable: true),
+                    IsPreview = table.Column<bool>(nullable: false),
+                    Duration = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseVideos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseVideos_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserCourses",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CourseId = table.Column<int>(nullable: false),
+                    AppUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserCourses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserCourses_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserCourses_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
@@ -552,6 +658,11 @@ namespace Digiuth.Migrations
                 column: "MainCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CourseContents_CourseId",
+                table: "CourseContents",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Courses_AppUserId",
                 table: "Courses",
                 column: "AppUserId");
@@ -572,9 +683,24 @@ namespace Digiuth.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CourseVideos_CourseId",
+                table: "CourseVideos",
+                column: "CourseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OurEvents_MainCategoryId",
                 table: "OurEvents",
                 column: "MainCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCourses_AppUserId",
+                table: "UserCourses",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserCourses_CourseId",
+                table: "UserCourses",
+                column: "CourseId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -604,10 +730,19 @@ namespace Digiuth.Migrations
                 name: "Blogs");
 
             migrationBuilder.DropTable(
+                name: "Certificates");
+
+            migrationBuilder.DropTable(
                 name: "Contacts");
 
             migrationBuilder.DropTable(
+                name: "CourseContents");
+
+            migrationBuilder.DropTable(
                 name: "CourseSubjects");
+
+            migrationBuilder.DropTable(
+                name: "CourseVideos");
 
             migrationBuilder.DropTable(
                 name: "OurEvents");
@@ -617,6 +752,12 @@ namespace Digiuth.Migrations
 
             migrationBuilder.DropTable(
                 name: "Testimonials");
+
+            migrationBuilder.DropTable(
+                name: "UserCourses");
+
+            migrationBuilder.DropTable(
+                name: "WatchedVideos");
 
             migrationBuilder.DropTable(
                 name: "WatchUs");

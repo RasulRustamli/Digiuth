@@ -58,7 +58,7 @@
                             <ul>
                                 @foreach (var item in Model.Courses)
                                 {
-                                    <li><a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id"><span>@item.AppUser.FullName</span>  --  @item.Name</a> (4)</li>
+                                    <li><a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id"><span>@item.AppUser.FullName</span>  --  @item.Name</a> </li>
                                 }
                             </ul>
                         </section>

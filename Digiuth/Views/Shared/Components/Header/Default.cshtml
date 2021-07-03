@@ -19,29 +19,32 @@
                             <nav id="mobile-menu" style="display: block;">
                                 <ul>
                                     <li class="sub">
-                                        <a asp-controller="Home" asp-action="Index">Ana Səhifə</a>
+                                        <a asp-controller="Home" asp-action="Index">Home</a>
                                     </li>
                                     <li class="sub">
-                                        <a asp-controller="About" asp-action="Index">Haqqımızda</a>
+                                        <a asp-controller="About" asp-action="Index">About Us</a>
                                     </li>
                                     <li class="sub">
-                                        <a asp-controller="Course" asp-action="Index">Kurslar</a>
+                                        <a asp-controller="Course" asp-action="Index">Courses</a>
                                     </li>
                                     <li class="sub">
-                                        <a asp-controller="Event" asp-action="Index">Tədbirlər</a>
+                                        <a asp-controller="Event" asp-action="Index">Events</a>
                                     </li>
 
                                     <li class="sub">
-                                        <a asp-controller="Team" asp-action="Index">Muəllimlər</a>
+                                        <a asp-controller="Team" asp-action="Index">Teachers</a>
                                     </li>
 
                                     <li class="sub">
-                                        <a asp-controller="Blog" asp-action="Index">Blog</a>
+                                        <a asp-controller="Blog" asp-action="Index">Xeberler</a>
                                     </li>
 
 
-                                    <li><a asp-controller="Contact" asp-action="Index">Əlaqə</a></li>
-                                   
+                                    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <li><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin</a></li>
+                                    }
                                     <li class="sub">
                                         @if (!User.Identity.IsAuthenticated)
                                         {

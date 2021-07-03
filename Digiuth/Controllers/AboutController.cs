@@ -17,14 +17,14 @@ namespace Digiuth.Controllers
             _db = db;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             AboutVM aboutVM = new AboutVM
             {
                 AboutUs = _db.AboutUs.FirstOrDefault(),
                 Testimonials = _db.Testimonials,
                 WatchUs=_db.WatchUs.FirstOrDefault(),
-                User=_db.Users,
+                User=_db.Users.Where(x=>x.IsTeacher&&x.IsVerified),
                 Blogs=_db.Blogs
             };
             return View(aboutVM);

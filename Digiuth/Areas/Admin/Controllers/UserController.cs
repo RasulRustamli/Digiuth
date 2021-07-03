@@ -26,7 +26,7 @@ namespace Digiuth.Areas.Admin.Controllers
         {
             List<UserVM> usersVM = new List<UserVM>();
             List<AppUser> users;
-            users = _userManager.Users.ToList();
+            users = _db.Users.Where(x=>x.IsTeacher).ToList();
             foreach (AppUser user in users)
             {
                 UserVM userVM = new UserVM
@@ -72,7 +72,7 @@ namespace Digiuth.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteUser(string id)
         {
             AppUser appUser = _db.Users.Include(x => x.Course).FirstOrDefault(s => s.Id == id);
-            if (appUser == null) return RedirectToAction("Index", "Error404");
+            if (appUser == null) return NotFound();
             foreach (var jobs in appUser.Course)
             {
                 _db.Courses.Remove(jobs);
@@ -83,6 +83,27 @@ namespace Digiuth.Areas.Admin.Controllers
             }
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+        public async Task<IActionResult> StudentList()
+        {
+            List<UserVM> usersVM = new List<UserVM>();
+            List<AppUser> users;
+            users = _db.Users.Where(x => x.IsTeacher == false).ToList();
+            foreach (AppUser user in users)
+            {
+                UserVM userVM = new UserVM
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    Image = user.Image,
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    IsVerified = user.IsVerified
+                };
+                usersVM.Add(userVM);
+            }
+
+            return View(usersVM);
         }
     }
 }

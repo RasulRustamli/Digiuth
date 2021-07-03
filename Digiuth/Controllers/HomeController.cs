@@ -22,12 +22,13 @@ namespace Digiuth.Controllers
             HomeVM homeVM = new HomeVM
             {
                 Bio = _db.Bios.FirstOrDefault(),
-                AboutUs=_db.AboutUs.FirstOrDefault(),
-                Testimonials =_db.Testimonials,
-                WatchUs=_db.WatchUs.FirstOrDefault(),
-                MainCategories=_db.MainCategories,
-                OurEvents=_db.OurEvents,
-                Blogs=_db.Blogs
+                AboutUs = _db.AboutUs.FirstOrDefault(),
+                Testimonials = _db.Testimonials,
+                WatchUs = _db.WatchUs.FirstOrDefault(),
+                MainCategories = _db.MainCategories,
+                OurEvents = _db.OurEvents,
+                Blogs = _db.Blogs,
+                Courses = _db.Courses.Where(x => x.IsFeatured && x.IsFeatured).ToList()
             };
             return View(homeVM);
         }

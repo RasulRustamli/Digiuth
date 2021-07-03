@@ -24,10 +24,17 @@ namespace Digiuth.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
-        }
+        } 
         public IActionResult Index()
         {
-            return View(_db.Users.Where(x=>x.IsVerified).ToList());
+            return View(_db.Users.Where(x=>x.IsVerified && x.IsTeacher).ToList());
+        }
+        public IActionResult Detail(string id)
+        {
+            if (id == null) return NotFound();
+            AppUser user = _db.Users.FirstOrDefault(x => x.Id == id && x.IsVerified);
+            if (user==null) return NotFound();
+            return View(user);
         }
     }
 }

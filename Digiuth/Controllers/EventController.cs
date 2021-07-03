@@ -21,7 +21,9 @@ namespace Digiuth.Controllers
         {
             ViewBag.MainCategories = _db.MainCategories.ToList();
             if (id == null) return NotFound();
-            OurEvent ourEvent = _db.OurEvents.Include(x => x.MainCategory).FirstOrDefault(x => x.Id == id);
+            OurEvent ourEvent = _db.OurEvents
+                .Include(x => x.MainCategory)
+                .FirstOrDefault(x => x.Id == id);
             if (ourEvent == null) return NotFound();
             return View(ourEvent);
         }

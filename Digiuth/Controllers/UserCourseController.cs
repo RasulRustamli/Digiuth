@@ -1,5 +1,6 @@
 ﻿using Digiuth.DAL;
 using Digiuth.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -18,21 +19,18 @@ namespace Digiuth.Controllers
             _db = db;
             _userManager = userManager;
         }
+        [Authorize(Roles ="Student")]
         public IActionResult Index()
         {
             return View();
         }
 
-        
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> Create(int id)
         {
            
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var dbUserCourse = _db.UserCourses.FirstOrDefault(x => x.AppUserId == user.Id && x.CourseId == id);
-            if (dbUserCourse != null)
-            {
-                return Ok("error");
-            }
+           
             UserCourse userCourse = new UserCourse
             {
                 CourseId = id,

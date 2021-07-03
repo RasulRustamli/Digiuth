@@ -11,26 +11,28 @@
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input asp-for="Email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-
+        <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">Full Name</label>
         <input asp-for="FullName" class="form-control" aria-describedby="emailHelp" placeholder="Full name">
-        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <span asp-validation-for="FullName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="exampleInputEmail1">UserName</label>
         <input asp-for="UserName" class="form-control" aria-describedby="emailHelp" placeholder="USer Name">
-        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <span asp-validation-for="UserName" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input asp-for="Password" class="form-control" placeholder="Password">
+        <span asp-validation-for="Password" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
         <input asp-for="ConfirmPassword" class="form-control" placeholder="Password">
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <a asp-action="Login" class="btn btn-danger">Login</a>
+    <button type="submit" class="btn btn-full">Submit</button>
+    <a asp-action="Login" class="btn btn-full">Login</a>
 </form>

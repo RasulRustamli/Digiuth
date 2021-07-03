@@ -19,12 +19,14 @@ namespace Digiuth.Controllers
         {
             if (id == null) return NotFound();
             MainCategory category = await _db.MainCategories.FindAsync(id);
-            if (category == null) return NotFound();
+            if (category == null) return NotFound();    
             MainCategoryVM mainCategory = new MainCategoryVM
             {
                 Testimonials = _db.Testimonials,
                 MainCategory = category,
-                Courses = _db.Courses.Include(x=>x.AppUser).Where(x => x.ChildCategory.MainCategoryId==id && x.IsVerified)
+                Courses = _db.Courses
+                .Include(x=>x.AppUser)
+                .Where(x => x.ChildCategory.MainCategoryId==id && x.IsVerified)
             };
             return View(mainCategory);
         }
