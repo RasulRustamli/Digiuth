@@ -14,9 +14,10 @@ namespace Digiuth.Models
         [Required]
         public string  LastName { get; set;}
         public string  TeacherName { get; set;}
+        public string  TeacherId { get; set;}
         public string CourseName { get; set; }
         public DateTime EndDate { get; set; }
-        public string AppUserId { get; set; }
+        public string StudentId { get; set; }
         public int CourseId { get; set; }
         public bool IsVerified { get; set; }
         public int CertificateCode { get; set; }

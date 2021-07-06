@@ -77,6 +77,7 @@
                             <input type="hidden" id="certificateCourseId" value="@Model.Course.Id" />
                             <input type="hidden" id="certificateCourseName" value="@Model.Course.Name" />
                             <input type="hidden" id="certificateTeacherName" value="@Model.Course.AppUser.FullName" />
+                            <input type="hidden" id="certificateTeacherId" value="@Model.Course.AppUserId" />
                             
                             <form method="post" class="certicate-form">
                                 <div class="row">
@@ -188,7 +189,8 @@
                     LastName: $(".lastName").val(),
                     CourseName: $("#certificateCourseName").val(),
                     CourseId: $("#certificateCourseId").val(),
-                    TeacherName: $("#certificateTeacherName").val()
+                    TeacherName: $("#certificateTeacherName").val(),
+                    TeacherId: $("#certificateTeacherId").val()
                 };
                 $.ajax({
                     url: "/watchedvideos/Index",
@@ -196,28 +198,28 @@
                     data: formData,
                     success: function (response) {
                         if (response) {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'error',
-                                title: 'You generated your certificate before',
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function (result) {
-                                $(".firstName").val("");
-                                $(".lastName").val("");
-                            })
+                            //Swal.fire({
+                            //    position: 'center',
+                            //    icon: 'error',
+                            //    title: 'You generated your certificate before',
+                            //    showConfirmButton: false,
+                            //    timer: 1500
+                            //}).then(function (result) {
+                            //    $(".firstName").val("");
+                            //    $(".lastName").val("");
+                            //})
                         } else {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'success',
-                                title: 'Your certificate has generated',
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(function (result) {
-                                // document.getElementsByClassName("cbr-alert")[0].style.display = "none"
-                                $(".firstName").val("");
-                                $(".lastName").val("");
-                            })
+                            //Swal.fire({
+                            //    position: 'center',
+                            //    icon: 'success',
+                            //    title: 'Your certificate has generated',
+                            //    showConfirmButton: false,
+                            //    timer: 1500
+                            //}).then(function (result) {
+                            //    // document.getElementsByClassName("cbr-alert")[0].style.display = "none"
+                            //    $(".firstName").val("");
+                            //    $(".lastName").val("");
+                            //})
                         }
                     },
                     error: function (error) { }

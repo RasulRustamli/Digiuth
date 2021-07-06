@@ -74,11 +74,12 @@ namespace Digiuth.Controllers
                 TeacherName = model.TeacherName,
                 CourseName = model.CourseName,
                 CourseId = model.CourseId,
-                AppUserId = user.Id,
+                StudentId = user.Id,
+                TeacherId=model.TeacherId,
                 IsVerified=false
             };
             var existUser = _db.Certificates
-                .FirstOrDefault(x => x.AppUserId == user.Id && x.CourseId==model.CourseId);
+                .FirstOrDefault(x => x.StudentId == user.Id && x.CourseId==model.CourseId);
             if (existUser == null)
             {
                 await _db.Certificates.AddAsync(certificate);

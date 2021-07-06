@@ -291,5 +291,43 @@ namespace Digiuth.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Detail", "Course", new { @id = content.CourseId });
         }
+        public async Task<IActionResult> TeacherCertificatedUsers()
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var certificatedUsers = _db.Certificates.Where(x => x.TeacherId == user.Id).ToList();
+            return View(certificatedUsers);
+        }
+        public async Task<IActionResult> MyCertificates()
+        {
+            AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var certificatedUsers = _db.Certificates.Where(x => x.StudentId == user.Id&&x.IsVerified).ToList();
+            return View(certificatedUsers);
+        }
+        public async Task<IActionResult> Active(int? id)
+        {
+            if (id == null) return NotFound();
+            var certificate = await _db.Certificates.FindAsync(id);
+            if (certificate == null) return NotFound();
+            certificate.IsVerified = true;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("TeacherCertificatedUsers","Course");
+        }
+
+        public async Task<IActionResult> Deactive(int? id)
+        {
+            if (id == null) return NotFound();
+            var certificate = await _db.Certificates.FindAsync(id);
+            if (certificate == null) return NotFound();
+            certificate.IsVerified = false;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("TeacherCertificatedUsers", "Course");
+
+        }
+        public IActionResult GetCertificate(int? id)
+        {
+            if (id == null) return View();
+            Certificate certificate = _db.Certificates.FirstOrDefault(p => p.Id == id);
+            return View(certificate);
+        }
     }
 }
