@@ -79,26 +79,7 @@
                             <input type="hidden" id="certificateTeacherName" value="@Model.Course.AppUser.FullName" />
                             <input type="hidden" id="certificateTeacherId" value="@Model.Course.AppUserId" />
                             
-                            <form method="post" class="certicate-form">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="contact-field p-relative c-name mb-20">
-                                            <input asp-for="Certificate.FirstName" id="firstn" name="firstn" class="firstName" placeholder="First Name">
-                                            <span asp-validation-for="Certificate.FirstName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="contact-field p-relative c-email mb-20">
-                                            <input asp-for="Certificate.LastName" id="lastn" name="lastn" class="lastName" placeholder="Last Name">
-                                            <span asp-validation-for="Certificate.LastName" class="text-danger"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Generate Sertificate</button>
-                                    </div>
-
-                                </div>
-                            </form>
+                           
                         </div>
                         }
                     </div>
@@ -114,7 +95,33 @@
     </div>
 </section>
 
+<section>
 
+    <div class="container">
+        <div class="row">
+            <form method="post" class="certicate-form">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="contact-field p-relative c-name mb-20">
+                            <input asp-for="Certificate.FirstName" id="firstn" name="firstn" class="firstName" placeholder="First Name">
+                            <span asp-validation-for="Certificate.FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="contact-field p-relative c-email mb-20">
+                            <input asp-for="Certificate.LastName" id="lastn" name="lastn" class="lastName" placeholder="Last Name">
+                            <span asp-validation-for="Certificate.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Generate Sertificate</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 <!-- services-area -->
 <section id="services" class="services-area pt-120 pb-120 fix"
          style=" background-image: url(../../assets/img/bg/services-bg-aliments.png); background-repeat: no-repeat; background-position: center;">
@@ -198,29 +205,29 @@
                     data: formData,
                     success: function (response) {
                         if (response) {
-                            //Swal.fire({
-                            //    position: 'center',
-                            //    icon: 'error',
-                            //    title: 'You generated your certificate before',
-                            //    showConfirmButton: false,
-                            //    timer: 1500
-                            //}).then(function (result) {
-                            //    $(".firstName").val("");
-                            //    $(".lastName").val("");
-                            //})
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'error',
+                                title: 'You generated your certificate before',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function (result) {
+                                $(".firstName").val("");
+                                $(".lastName").val("");
+                            })
                         } else {
-                            //Swal.fire({
-                            //    position: 'center',
-                            //    icon: 'success',
-                            //    title: 'Your certificate has generated',
-                            //    showConfirmButton: false,
-                            //    timer: 1500
-                            //}).then(function (result) {
-                            //    // document.getElementsByClassName("cbr-alert")[0].style.display = "none"
-                            //    $(".firstName").val("");
-                            //    $(".lastName").val("");
-                            //})
-                        }
+                            Swal.fire({
+                                position: 'center',
+                                icon: 'success',
+                                title: 'Your certificate has generated',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function (result) {
+                                $(".firstName").val("");
+                                $(".lastName").val("");
+                                // document.getElementsByClassName("cbr-alert")[0].style.display = "none"
+                            })
+                        };
                     },
                     error: function (error) { }
                 })

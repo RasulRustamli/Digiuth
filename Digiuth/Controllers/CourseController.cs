@@ -291,18 +291,21 @@ namespace Digiuth.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Detail", "Course", new { @id = content.CourseId });
         }
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> TeacherCertificatedUsers()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             var certificatedUsers = _db.Certificates.Where(x => x.TeacherId == user.Id).ToList();
             return View(certificatedUsers);
         }
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> MyCertificates()
         {
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             var certificatedUsers = _db.Certificates.Where(x => x.StudentId == user.Id&&x.IsVerified).ToList();
             return View(certificatedUsers);
         }
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Active(int? id)
         {
             if (id == null) return NotFound();
@@ -312,7 +315,7 @@ namespace Digiuth.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("TeacherCertificatedUsers","Course");
         }
-
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> Deactive(int? id)
         {
             if (id == null) return NotFound();
@@ -323,6 +326,7 @@ namespace Digiuth.Controllers
             return RedirectToAction("TeacherCertificatedUsers", "Course");
 
         }
+        [Authorize(Roles = "Student")]
         public IActionResult GetCertificate(int? id)
         {
             if (id == null) return View();

@@ -7,16 +7,18 @@
 
 
 <div class="container">
-    <div class="row">
+    <div class="row container-b">
         <div class="col-lg-8">
             <div class="container-c">
                 <iframe data-target-code="@Model.CertificateCode" class="responsive-iframe" data-target-course="@Model.CourseName" data-target-name="@Model.FirstName @Model.LastName"
-                        data-target-date="@Model.EndDate.ToString("dd MMMM yyyy")" id="cert" src="" \ style="border: 0;"></iframe>
+                        data-target-date="@Model.EndDate.ToString("dd MMMM yyyy")" id="cert" src="" \ style="border: 0; height: 100%; width: 100%;"></iframe>
             </div>
 
         </div>
     </div>
 </div>
+
+
 @section Scripts{
     <script src="~/admin/js/pdflib.js"></script>
     <script src="~/admin/js/FileSaver.js"></script>

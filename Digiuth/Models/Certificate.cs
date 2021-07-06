@@ -25,7 +25,7 @@ namespace Digiuth.Models
         {
             EndDate = DateTime.Now;
             var random = new Random();
-            CertificateCode = random.Next(100000);
+            CertificateCode = random.Next(1000);
         }
     }
 }

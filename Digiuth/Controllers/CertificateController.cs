@@ -31,5 +31,6 @@ namespace Digiuth.Controllers
             if (!ModelState.IsValid) return View();
             return RedirectToAction(nameof(Index));
         }
+
     }
 }
