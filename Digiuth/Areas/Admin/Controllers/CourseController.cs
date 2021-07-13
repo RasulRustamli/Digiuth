@@ -46,9 +46,22 @@ namespace Digiuth.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Delete(int? id)
         {
+           // AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (id == null) return NotFound();
             Course course = await _db.Courses.FindAsync(id);
             if (course == null) return NotFound();
+            var userWatchedVideo = _db.WatchedVideos
+               .Where(x => x.CourseId == course.Id).ToList();
+            var certificatedUsers = _db.Certificates.Where(x => x.CourseId == id).ToList();
+
+            foreach (var item in userWatchedVideo)
+            {
+                _db.WatchedVideos.Remove(item);
+            }
+            foreach (var item in certificatedUsers)
+            {
+                _db.Certificates.Remove(item);
+            }
             _db.Courses.Remove(course);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

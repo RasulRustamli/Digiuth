@@ -109,7 +109,7 @@ namespace Digiuth.Controllers
             
             await _db.Courses.AddAsync(newCourse);
             await _db.SaveChangesAsync();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("MyCourses", "Course");
         }
 
         public IActionResult Detail(int? id)
@@ -159,9 +159,15 @@ namespace Digiuth.Controllers
 
             var userWatchedVideo = _db.WatchedVideos
                 .Where(x => x.CourseId == course.Id && x.UserId == user.Id.ToString()).ToList();
+            var certificatedUsers = _db.Certificates.Where(x => x.CourseId == id).ToList();
+
             foreach (var item in userWatchedVideo)
             {
                 _db.WatchedVideos.Remove(item);
+            }
+            foreach (var item in certificatedUsers)
+            {
+                _db.Certificates.Remove(item);
             }
 
             if (course.AppUserId==user.Id)

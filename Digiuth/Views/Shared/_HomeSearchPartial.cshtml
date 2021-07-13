@@ -1,0 +1,41 @@
+﻿@model HomeSearchVM
+@foreach (var item in Model.Events)
+{
+    <a asp-controller="Event" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Event : @item.Title</li>
+        </ul>
+    </a>
+}
+@foreach (var item in Model.Blogs)
+{
+    <a asp-controller="Blog" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Blog : @item.Title</li>
+        </ul>
+    </a>
+}
+@foreach (var item in Model.MainCategories)
+{
+    <a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Category : @item.Name</li>
+        </ul>
+    </a>
+}
+@foreach (var item in Model.Teachers)
+{
+    <a asp-controller="Team" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Teacher : @item.FullName</li>
+        </ul>
+    </a>
+}
+@foreach (var item in Model.Courses)
+{
+    <a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Course : @item.Name</li>
+        </ul>
+    </a>
+}

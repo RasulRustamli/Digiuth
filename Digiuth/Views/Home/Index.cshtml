@@ -5,7 +5,7 @@
 
 <!-- main-area -->
 <main>
-
+    <input type="hidden" id="hidden" value="home" />
     <!-- search-popup -->
     <div class="modal fade bs-example-modal-lg search-bg popup1" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         <div class="slider-btn mt-10">
-                            <a asp-controller="About"asp-action="Index" class="btn ss-btn" data-animation="fadeInRight"
+                            <a asp-controller="About" asp-action="Index" class="btn ss-btn" data-animation="fadeInRight"
                                data-delay=".8s">Read More</a>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                     <div class="video-img wow fadeInRight animated" data-animation="fadeInDown animated"
                          data-delay=".2s"
                          style="background-image:url(assets/img/video/vedio-img.png); background-repeat: no-repeat; background-position: center;">
-                         <a href="@Model.WatchUs.VideoUrl" class="video-i popup-video">
+                        <a href="@Model.WatchUs.VideoUrl" class="video-i popup-video">
                             <img src="~/assets/img/video/play.svg" alt="img" class="active-icon">
                         </a>
                     </div>
@@ -157,7 +157,7 @@
                     </div>
 
                     <div class="slider-btn mt-10">
-                        <a  class="btn ss-btn" asp-controller="Course" asp-action="Index" data-animation="fadeInRight"
+                        <a class="btn ss-btn" asp-controller="Course" asp-action="Index" data-animation="fadeInRight"
                            data-delay=".8s">View All Services</a>
                     </div>
                 </div>
@@ -205,15 +205,15 @@
 
                         @foreach (var item in Model.Courses)
                         {
-                        <div class="box-courses">
-                            <a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">
-                                <img src="~/assets/img/course/@item.Image"
-                                     alt="courses-img1">
-                             </a>
+                            <div class="box-courses">
+                                <a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">
+                                    <img src="~/assets/img/course/@item.Image"
+                                         alt="courses-img1">
+                                </a>
                                 <div class="text">
                                     <h3><a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">@item.Name</a></h3>
                                 </div>
-                        </div>
+                            </div>
                         }
 
                     </div>
@@ -243,7 +243,7 @@
 
             </div>
             <div class="row">
-                @foreach (var item in Model.OurEvents.Take(6).OrderByDescending(x=>x.Id))
+                @foreach (var item in Model.OurEvents.Take(6).OrderByDescending(x => x.Id))
                 {
                     <div class="col-lg-6 col-md-12">
 
@@ -348,7 +348,7 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="single-post2 mb-30  wow fadeInDown  animated">
                             <div class="blog-thumb2">
-                               <img src="~/assets/img/blog/@item.Image" alt="img">
+                                <img src="~/assets/img/blog/@item.Image" alt="img">
                             </div>
                             <div class="blog-content2 text-center">
                                 <div class="b-meta">
@@ -385,3 +385,7 @@
     <!-- blog-area-end -->
 </main>
 <!-- main-area-end -->
+@section Scripts{
+
+    <script src="~/assets/js/search.js"></script>
+} 

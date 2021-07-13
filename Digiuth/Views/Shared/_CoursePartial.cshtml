@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<Course>
 @foreach (Course item in Model)
 {
-    <a asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">
-        <ul>
-            <li style="color:white">@item.Name</li>
+    <a style="background-color:#9CCA46;color:white;" asp-controller="Course" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Course : @item.Name</li>
         </ul>
     </a>
 }

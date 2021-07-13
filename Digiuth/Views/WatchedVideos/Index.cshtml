@@ -96,31 +96,40 @@
 </section>
 
 <section>
-
-    <div class="container">
-        <div class="row">
-            <form method="post" class="certicate-form">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="contact-field p-relative c-name mb-20">
-                            <input asp-for="Certificate.FirstName" id="firstn" name="firstn" class="firstName" placeholder="First Name">
-                            <span asp-validation-for="Certificate.FirstName" class="text-danger"></span>
+    @if ( Model.UserWatchedVideos.Count()>0)
+    {
+        <div class="container">
+            <div class="row">
+                <form method="post" class="certicate-form digiuth_login">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="contact-field p-relative c-name mb-20" style="padding-right:0px;">
+                                <h5 style="color:#9CCA46;font-weight:" 700">Lorem ipsum doler sit amet lorem ipsum doler sit amet</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="contact-field p-relative c-email mb-20">
-                            <input asp-for="Certificate.LastName" id="lastn" name="lastn" class="lastName" placeholder="Last Name">
-                            <span asp-validation-for="Certificate.LastName" class="text-danger"></span>
+                        <div class="col-lg-12">
+                            <div class="contact-field p-relative c-name mb-20" style="padding-right:0px;">
+                                <input asp-for="Certificate.FirstName" id="firstn" name="firstn" class="firstName" placeholder="First Name">
+                                <span asp-validation-for="Certificate.FirstName" class="text-danger"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <button type="submit" class="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Generate Sertificate</button>
-                    </div>
+                        <div class="col-lg-12">
+                            <div class="contact-field p-relative c-email mb-20" style="padding-right:0px;">
+                                <input asp-for="Certificate.LastName" id="lastn" name="lastn" class="lastName" placeholder="Last Name">
+                                <span asp-validation-for="Certificate.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn ss-btn w-100" data-animation="fadeInRight" data-delay=".8s">Generate Sertificate</button>
+                        </div>
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+    }
+
+
 </section>
 <!-- services-area -->
 <section id="services" class="services-area pt-120 pb-120 fix"

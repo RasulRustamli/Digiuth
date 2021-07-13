@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<MainCategory>
 @foreach (MainCategory item in Model)
 {
-    <a asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">
-        <ul>
-            <li style="color:white">@item.Name</li>
+    <a  asp-controller="MainCategory" asp-action="Detail" asp-route-id="@item.Id">
+        <ul style="background-color:#9CCA46;color:white;">
+            <li style="color:white">Category : @item.Name</li>
         </ul>
     </a>
 }

@@ -1,5 +1,6 @@
 ﻿using Digiuth.DAL;
 using Digiuth.Models;
+using Digiuth.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -54,6 +55,27 @@ namespace Digiuth.Controllers
                     break;
             }
             return Ok(list);
+        }
+
+        public IActionResult HomeSearch(string search)
+        {
+            HomeSearchVM homeSearch = new HomeSearchVM
+            {
+                Events= _db.OurEvents
+                       .Where(t => t.Title.ToLower()
+                       .Contains(search.ToLower()))
+                       .Take(3).ToList(),
+                Blogs = _db.Blogs
+                        .Where(t => t.Title.ToLower()
+                        .Contains(search.ToLower())).Take(3).ToList(),
+                Courses = _db.Courses
+                       .Where(t => t.Name.ToLower().Contains(search.ToLower())).Take(3).ToList(),
+                MainCategories= _db.MainCategories
+                       .Where(t => t.Name.ToLower().Contains(search.ToLower())).Take(3).ToList(),
+                Teachers=_db.Users.Where(x=>x.IsTeacher).Take(3).ToList(),
+        };
+            return PartialView("_HomeSearchPartial", homeSearch);
+
         }
     }
 }

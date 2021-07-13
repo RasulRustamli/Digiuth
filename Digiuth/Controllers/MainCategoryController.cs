@@ -26,6 +26,7 @@ namespace Digiuth.Controllers
                 MainCategory = category,
                 Courses = _db.Courses
                 .Include(x=>x.AppUser)
+                .Include(x=>x.CourseVideos)
                 .Where(x => x.ChildCategory.MainCategoryId==id && x.IsVerified)
             };
             return View(mainCategory);

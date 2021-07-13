@@ -35,11 +35,11 @@ namespace Digiuth
             services.AddAWSService<IAmazonS3>();
             services.AddIdentity<AppUser, IdentityRole>(identityOptions =>
             {
-                identityOptions.Password.RequiredLength = 6;
+                identityOptions.Password.RequiredLength=6;
                 identityOptions.Password.RequireNonAlphanumeric = false;
                 identityOptions.Password.RequireLowercase = false;
                 identityOptions.Password.RequireUppercase = false;
-                identityOptions.Password.RequireDigit = true;
+                identityOptions.Password.RequireDigit=true;
 
                 identityOptions.User.RequireUniqueEmail = true;
 
