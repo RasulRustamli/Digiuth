@@ -32,6 +32,7 @@ namespace Digiuth
             {
                 options.UseSqlServer(_config["ConnectionString:Default"]);
             });
+            services.AddDefaultAWSOptions(_config.GetAWSOptions("service1"));
             services.AddAWSService<IAmazonS3>();
             services.AddIdentity<AppUser, IdentityRole>(identityOptions =>
             {

@@ -38,64 +38,73 @@ namespace Digiuth.Controllers
             _roleManager = roleManager;
             _db = db;
             _env = env;
-            this.AmazonS3 = amazonS3;
+            AmazonS3 = amazonS3;
         }
-        [Authorize]
-        public async Task<IActionResult> Index(int id,string name)
+        [Authorize(Roles = "Student")]
+        public async Task<IActionResult> Index(int id, string name)
         {
-            //get current user
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            //check is course installed
-            var userCourses =await  _db.UserCourses
-                .FirstOrDefaultAsync(x=>x.CourseId==id&&x.AppUserId==user.Id);
-            if (userCourses==null)
-            {
-                return RedirectToAction("Index", "Course");
-            }
-          
-            //get watchedlist
-            var watchedList = _db.WatchedVideos
-                .Where(x=>x.CourseId==id&&x.UserId==user.Id.ToString())
-                .ToList();
-            CourseVideo video = new CourseVideo();
-            if (watchedList.Count()==0)
-            {
-                 video = _db.CourseVideos
-                .FirstOrDefault(x => x.IsPreview == false && x.CourseId == id &&
-                x.Course.AppUser.UserName == name);   
-            }           
-            else
-            {
-                UserWatchedVideo watchedVideo = _db.WatchedVideos.OrderByDescending(x=>x.Id)
-                    .FirstOrDefault(x=>x.UserId==user.Id.ToString()&& x.CourseId == id);
-                var videos = _db.CourseVideos
-                    .Where(x => x.IsPreview == false && x.CourseId == id&& x.Course.AppUser.UserName == name).ToList();
-                int index = videos.FindIndex(a => a.Id == watchedVideo.VideoId);
 
-                if (videos.Count>index+1)
+            try
+            {
+                //get current user
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                //check is course installed
+                var userCourses = await _db.UserCourses
+                    .FirstOrDefaultAsync(x => x.CourseId == id && x.AppUserId == user.Id);
+                if (userCourses == null)
                 {
-                    video = videos[index + 1];
+                    return RedirectToAction("Index", "Course");
+                }
+
+                //get watchedlist
+                var watchedList = _db.WatchedVideos
+                    .Where(x => x.CourseId == id && x.UserId == user.Id.ToString())
+                    .ToList();
+                CourseVideo video = new CourseVideo();
+                if (watchedList.Count() == 0)
+                {
+                    video = _db.CourseVideos
+                   .FirstOrDefault(x => x.IsPreview == false && x.CourseId == id &&
+                   x.Course.AppUser.UserName == name);
                 }
                 else
                 {
-                    video = videos[index];
+                    UserWatchedVideo watchedVideo = _db.WatchedVideos.OrderByDescending(x => x.Id)
+                        .FirstOrDefault(x => x.UserId == user.Id.ToString() && x.CourseId == id);
+                    var videos = _db.CourseVideos
+                        .Where(x => x.IsPreview == false && x.CourseId == id && x.Course.AppUser.UserName == name).ToList();
+                    int index = videos.FindIndex(a => a.Id == watchedVideo.VideoId);
+
+                    if (videos.Count > index + 1)
+                    {
+                        video = videos[index + 1];
+                    }
+                    else
+                    {
+                        video = videos[index];
+                    }
+
                 }
+                var videoVM = new VideoVM
+                {
+                    CourseVideos = _db.CourseVideos
+                    .Where(x => x.IsPreview == false && x.CourseId == id &&
+                    x.Course.AppUser.UserName == name
+                    ).ToList(),
+                    CourseVideo = video,
 
+                    MainCategories = _db.MainCategories.ToList(),
+                    Course = _db.Courses.FirstOrDefault(x => x.Id == id)
+                };
+                return View(videoVM);
             }
-            var videoVM = new VideoVM
+            catch (Exception e)
             {
-                CourseVideos = _db.CourseVideos
-                .Where(x => x.IsPreview == false && x.CourseId == id &&
-                x.Course.AppUser.UserName==name
-                ).ToList(),
-                CourseVideo=video,
-
-                MainCategories = _db.MainCategories.ToList(),
-                Course = _db.Courses.FirstOrDefault(x => x.Id == id)
-            };
-              return View(videoVM);
+                
+                  Console.WriteLine($"The directory was not found: '{e.Message}'");
+            }
+            return View();
         }
-
         public IActionResult Create(int id)
         {
             ViewBag.Id = id;
@@ -213,23 +222,11 @@ namespace Digiuth.Controllers
             return PartialView("_nextVideo", video);
         }
 
-        //public async Task<IActionResult> GetPreviousVideo(int id, int CourseId)
-        //{
-        //   // var dbWatchedVideo = _db.WatchedVideos.FirstOrDefault(x => x.VideoId == id);
-           
-        //    var videos = _db.CourseVideos
-        //        .Where(x => x.IsPreview == false && x.CourseId == CourseId).ToList();
-        //   // var video = videos.FirstOrDefault(x=>x.Id==dbWatchedVideo.VideoId);
 
-
-        //    int index = videos.FindIndex(a => a.Id == id);
-        //    var video = videos[index - 1];
-        //    if (video == null)
-        //    {
-        //        video = videos[index];
-        //    }
-        //    return PartialView("_nextVideo", video);
-        //}
+        public IActionResult Detail()
+        {
+            return View();
+        }
 
     }
 }

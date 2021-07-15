@@ -88,5 +88,6 @@ namespace Digiuth.Controllers
             
             return Json(existUser);
         }
+       
     }
 }

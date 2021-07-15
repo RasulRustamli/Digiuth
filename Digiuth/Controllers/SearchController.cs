@@ -51,6 +51,8 @@ namespace Digiuth.Controllers
                     list = _db.MainCategories
                         .Where(t => t.Name.ToLower().Contains(search.ToLower())).Take(5).ToList();
                     return PartialView("_MainCategoryPartial", list);
+               
+                    
                 default:
                     break;
             }
@@ -72,7 +74,7 @@ namespace Digiuth.Controllers
                        .Where(t => t.Name.ToLower().Contains(search.ToLower())).Take(3).ToList(),
                 MainCategories= _db.MainCategories
                        .Where(t => t.Name.ToLower().Contains(search.ToLower())).Take(3).ToList(),
-                Teachers=_db.Users.Where(x=>x.IsTeacher).Take(3).ToList(),
+                Teachers=_db.Users.Where(x=>x.IsTeacher&&x.IsVerified && x.FullName.ToLower().Contains(search.ToLower())).Take(3).ToList(),
         };
             return PartialView("_HomeSearchPartial", homeSearch);
 
