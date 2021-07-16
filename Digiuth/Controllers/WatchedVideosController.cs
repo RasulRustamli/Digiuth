@@ -69,8 +69,8 @@ namespace Digiuth.Controllers
             
             var certificate = new Certificate
             {
-                FirstName = model.FirstName,
-                LastName = model.LastName,
+                FirstName = char.ToUpper(model.FirstName[0]) + model.FirstName.Substring(1),
+                LastName = char.ToUpper(model.LastName[0]) + model.LastName.Substring(1),
                 TeacherName = model.TeacherName,
                 CourseName = model.CourseName,
                 CourseId = model.CourseId,

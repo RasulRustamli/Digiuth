@@ -10,18 +10,12 @@ let code = certt.getAttribute("data-target-code");
 
 const generatePDFF = async (name, name2, name3,name4) => {
   const { PDFDocument, rgb, degrees } = PDFLib;
+    const exBytes = await fetch("https://digiuth.com/assets/cert.pdf").then((res) => {
 
-    const exBytes = await fetch("https://localhost:44398/assets/cert.pdf").then((res) => {
     return res.arrayBuffer();
   });
 
-  const exFont = await fetch("./Sanchez-Regular.ttf").then((res) =>
-    res.arrayBuffer()
-  );
-
   const pdfDoc = await PDFDocument.load(exBytes);
-  // pdfDoc.registerFontkit(fontKit);
-  // const myFont = await pdfDoc.embedFont(exFont);
 
   const pages = pdfDoc.getPages();
   const firstPg = pages[0];

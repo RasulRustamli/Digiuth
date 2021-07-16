@@ -4,46 +4,48 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form method="post" enctype="multipart/form-data" class="digiuth_login">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label for="exampleInputEmail1">FullName</label>
-        <input asp-for="FullName" class="form-control" placeholder="FullName">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Phone</label>
-        <input asp-for="Phone" class="form-control" placeholder="Phone">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Photo</label>
-        <input asp-for="Photo" class="form-control" placeholder="Photo">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Description</label>
-        <input asp-for="Description" class="form-control" placeholder="Description">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Address</label>
-        <input asp-for="Address" class="form-control" placeholder="Address">
-    </div>
-    @if (User.IsInRole("Teacher"))
-    {
+<div style="padding-top: 40px;">
+    <form method="post" enctype="multipart/form-data" class="digiuth_login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label for="exampleInputPassword1">WebSite</label>
-            <input asp-for="Website" class="form-control" placeholder="WebSite">
+            <label for="exampleInputEmail1">FullName</label>
+            <input asp-for="FullName" class="form-control" placeholder="FullName">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Position</label>
-            <input asp-for="Position" class="form-control" placeholder="Position">
+            <label for="exampleInputPassword1">Phone</label>
+            <input asp-for="Phone" class="form-control" placeholder="Phone">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Twitter</label>
-            <input asp-for="Twitter" class="form-control" placeholder="Twitter">
+            <label for="exampleInputPassword1">Photo</label>
+            <input asp-for="Photo" class="form-control" placeholder="Photo">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Facebook</label>
-            <input asp-for="Facebook" class="form-control" placeholder="Facebook">
+            <label for="exampleInputPassword1">Description</label>
+            <input asp-for="Description" class="form-control" placeholder="Description">
         </div>
-    }
-    <button type="submit" class="btn btn-full">Submit</button>
-</form>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Address</label>
+            <input asp-for="Address" class="form-control" placeholder="Address">
+        </div>
+        @if (User.IsInRole("Teacher"))
+        {
+            <div class="form-group">
+                <label for="exampleInputPassword1">WebSite</label>
+                <input asp-for="Website" class="form-control" placeholder="WebSite">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Position</label>
+                <input asp-for="Position" class="form-control" placeholder="Position">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Twitter</label>
+                <input asp-for="Twitter" class="form-control" placeholder="Twitter">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Facebook</label>
+                <input asp-for="Facebook" class="form-control" placeholder="Facebook">
+            </div>
+        }
+        <button type="submit" class="btn" style="padding: 12px 24px;">Submit</button>
+    </form>
+</div>

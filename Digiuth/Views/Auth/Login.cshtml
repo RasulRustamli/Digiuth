@@ -5,21 +5,25 @@
 
 
 
-<form method="post" class="digiuth_login">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input asp-for="Email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input asp-for="Password" class="form-control" placeholder="Password">
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+<div class="pt-80">
+    <form method="post" class="digiuth_login">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input asp-for="Email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input asp-for="Password" class="form-control" placeholder="Password">
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
 
-    <button type="submit" class="btn btn-primary btn-full"style="padding:10px">Submit</button>
-    <a asp-action="TeacherRegister" class="btn btn-full" style="padding:10px;" >Register for Teacher</a>
-    <a asp-action="StudentRegister" class="btn btn-full" style="padding:10px;">Register for Student</a>
-</form>
+        <div class="btn-container">
+            <button type="submit" class="btn-c">Submit</button>
+            <a asp-action="TeacherRegister" class="btn-c">Register as Teacher</a>
+            <a asp-action="StudentRegister" class="btn-c">Register as Student</a>
+        </div>
+    </form>
+</div>
 

@@ -66,9 +66,9 @@
                         <video class="detail-video" controls="controls">
                             <source src="@Model.CourseVideos.FirstOrDefault(x=>x.IsPreview).AwsVideoUrl" type="video/ogg" />
                         </video>
-                        <div class="inner-column">
-                            <p>
-                                <span class="dropcap">Digiuth</span> @Model.LongDesc
+                        <div class="inner-column" style="padding-top: 30px;">
+                            <p class="long-desc-c">
+                              @Model.LongDesc
                             </p>
                             <h4>What You Will Learn</h4>
                             <p>
@@ -162,7 +162,7 @@
                                 <ul>
                                     @foreach (var item in ViewBag.MainCategories)
                                     {
-                                        <li class="cat-item cat-item-16"><a href="#">@item.Name</a> (4)</li>
+                                        <li class="cat-item cat-item-16"><a href="#">@item.Name</a></li>
                                     }
                                 </ul>
                             </section>

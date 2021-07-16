@@ -13,6 +13,57 @@
     padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
 
+.brd {
+    max-width: 225px;
+    margin: auto;
+}
+
+.pt-80 {
+    padding-top: 80px;
+}
+
+.btn-c {
+    padding: 8px 32px;
+    outline: 0;
+    border: 0;
+    background: #9cca46;
+    color: white;
+    border-radius: 5px;
+}
+
+.btn-container {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+@media (max-width: 912px) {
+    .btn-container {
+        flex-direction: column;
+    }
+
+    .btn-c {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.link-c {
+    background: #9dca46db;
+    padding: 5px 20px;
+    border-radius: 3px;
+    color: white;
+}
+
+.link-c:hover {
+    color: #fff;
+}
+
+.bg-red {
+    background: #ff5e5e;
+}
 /* Then style the iframe to fit in the container div with full height and width */
 .responsive-iframe {
     position: absolute;
@@ -165,9 +216,9 @@ button {
     outline: medium none;
 }
 
-    a:hover {
+   /* a:hover {
         color: #9CCA46;
-    }
+    } */
 
     button:focus, input:focus, input:focus, textarea, textarea:focus {
         outline: none;
@@ -8225,20 +8276,14 @@ p.checkout-coupon input[type="text"] {
             padding-right: 30px;
         }
 
-            .project-detail .text-column .inner-column .dropcap {
-                float: left;
-                background: #9CCA46 0% 0% no-repeat padding-box;
-                border-radius: 20px;
-                color: #FFFFFF;
-                font-weight: 700;
-                margin-right: 20px;
-                padding: 11px;
-                font-size: 29px;
-            }
+        .long-desc-c::first-letter {
+            color: #9cca46;
+            font-size: 80px;
+        }
 
-            .project-detail .text-column .inner-column p strong {
-                color: #010f2e;
-            }
+        .project-detail .text-column .inner-column p strong {
+            color: #010f2e;
+        }
 
     .project-detail .pr-ul {
         margin-top: 10px;

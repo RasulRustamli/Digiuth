@@ -64,10 +64,10 @@
                                     <th scope="row">@count</th>
                                     <td><a asp-action="Detail" asp-route-id="@item.Id">@item.Course.Name</a></td>
                                     <td>
-                                        <a asp-controller="Video" asp-action="Index" asp-route-id="@item.Course.Id" asp-route-name="@item.Course.AppUser.UserName" style="color:blue">Here</a>
+                                        <a class="link-c" asp-controller="Video" asp-action="Index" asp-route-id="@item.Course.Id" asp-route-name="@item.Course.AppUser.UserName">Here</a>
                                     </td>
                                     <td>
-                                        <a asp-action="DeleteCourse" asp-route-id="@item.Id" style="color:red">Delete</a>
+                                        <a class="link-c bg-red" asp-action="DeleteCourse" asp-route-id="@item.Id">Delete</a>
                                     </td>
                                 </tr>
                             }
